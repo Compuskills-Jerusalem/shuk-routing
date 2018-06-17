@@ -9,11 +9,11 @@ USE ShukWazeDB;
 --);
 
 --CREATE TABLE Stalls(
---    ID INT NOT NULL PRIMARY KEY IDENTITY(1, 1),
+--  ID INT NOT NULL PRIMARY KEY IDENTITY(1, 1),
 --	StallName NVARCHAR(50),
 --	FirstCoord INT NOT NULL,
 --	SecondCoord INT NOT NULL,
---	Notes NVARCHAR(140)
+--	
 --);
 
 --CREATE TABLE CommoditiesStalls(
@@ -23,6 +23,7 @@ USE ShukWazeDB;
 --	Price DECIMAL NOT NULL CHECK(Price > 0),
 --	Rating INT CHECK(Rating >= 1 AND Rating <= 5),
 --	TimeRegistered DateTime NOT NULL DEFAULT(SYSDATETIME())
+--  Notes NVARCHAR(140);
 --);
 
 INSERT INTO Commodities (CommodityName)
