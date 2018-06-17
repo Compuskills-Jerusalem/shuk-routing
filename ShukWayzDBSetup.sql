@@ -1,30 +1,30 @@
---CREATE DATABASE ShukWayzDB;
+CREATE DATABASE ShukWayzDB;
 
 USE ShukWazeDB;
 
---CREATE TABLE Commodities(
---	ID INT NOT NULL PRIMARY KEY IDENTITY(1, 1),
---	CommodityName NVARCHAR(30) NOT NULL,
---	Notes NVARCHAR(140)
---);
+CREATE TABLE Commodities(
+	ID INT NOT NULL PRIMARY KEY IDENTITY(1, 1),
+	CommodityName NVARCHAR(30) NOT NULL,
 
---CREATE TABLE Stalls(
---  ID INT NOT NULL PRIMARY KEY IDENTITY(1, 1),
---	StallName NVARCHAR(50),
---	FirstCoord INT NOT NULL,
---	SecondCoord INT NOT NULL,
---	
---);
+);
 
---CREATE TABLE CommoditiesStalls(
---	ID INT NOT NULL PRIMARY KEY IDENTITY(1, 1),
---	CommoditiesID INT NOT NULL FOREIGN KEY REFERENCES Commodities(ID),
---	StallsID INT NOT NULL FOREIGN KEY REFERENCES Stalls(ID),
---	Price DECIMAL NOT NULL CHECK(Price > 0),
---	Rating INT CHECK(Rating >= 1 AND Rating <= 5),
---	TimeRegistered DateTime NOT NULL DEFAULT(SYSDATETIME())
---  Notes NVARCHAR(140);
---);
+CREATE TABLE Stalls(
+  ID INT NOT NULL PRIMARY KEY IDENTITY(1, 1),
+	StallName NVARCHAR(50),
+	FirstCoord INT NOT NULL,
+	SecondCoord INT NOT NULL,
+	
+);
+
+CREATE TABLE CommoditiesStalls(
+	ID INT NOT NULL PRIMARY KEY IDENTITY(1, 1),
+	CommoditiesID INT NOT NULL FOREIGN KEY REFERENCES Commodities(ID),
+	StallsID INT NOT NULL FOREIGN KEY REFERENCES Stalls(ID),
+	Price DECIMAL NOT NULL CHECK(Price > 0),
+	Rating INT CHECK(Rating >= 1 AND Rating <= 5),
+	TimeRegistered DateTime NOT NULL DEFAULT(SYSDATETIME()),
+    Notes NVARCHAR(140)
+);
 
 INSERT INTO Commodities (CommodityName)
 VALUES ('Grapes'), ('Bananas'), ('French Rolls');
