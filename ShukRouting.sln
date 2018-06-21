@@ -1,0 +1,31 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 15
+VisualStudioVersion = 15.0.27130.2020
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ShukRouting", "ShukRouting\ShukRouting.csproj", "{17A4C2AA-72BA-4E82-B39E-D6A235591FC1}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ShukRouting.DataAccess", "ShukRouting.DataAccess\ShukRouting.DataAccess.csproj", "{1BAAB480-C169-4ED8-A21F-320B9FF23716}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{17A4C2AA-72BA-4E82-B39E-D6A235591FC1}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{17A4C2AA-72BA-4E82-B39E-D6A235591FC1}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{17A4C2AA-72BA-4E82-B39E-D6A235591FC1}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{17A4C2AA-72BA-4E82-B39E-D6A235591FC1}.Release|Any CPU.Build.0 = Release|Any CPU
+		{1BAAB480-C169-4ED8-A21F-320B9FF23716}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{1BAAB480-C169-4ED8-A21F-320B9FF23716}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{1BAAB480-C169-4ED8-A21F-320B9FF23716}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{1BAAB480-C169-4ED8-A21F-320B9FF23716}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {D4A1DB45-ABE9-4E34-9D3B-F7A33F8369C5}
+	EndGlobalSection
+EndGlobal
