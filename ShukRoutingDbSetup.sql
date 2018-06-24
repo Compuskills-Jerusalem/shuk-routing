@@ -1,26 +1,30 @@
---CREATE DATABASE ShukRoutingDB;
+USE Northwind;
+
+IF db_id('ShukRoutingDB') IS NOT NULL DROP DATABASE ShukRoutingDB;
+
+CREATE DATABASE ShukRoutingDB;
 
 USE ShukRoutingDB;
 
 CREATE TABLE Commodities(
-	ID INT NOT NULL PRIMARY KEY IDENTITY(1, 1),
+	Commodity_ID INT NOT NULL PRIMARY KEY IDENTITY(1, 1),
 	CommodityName NVARCHAR(30) NOT NULL,
 
 );
 
 CREATE TABLE Stalls(
-  ID INT NOT NULL PRIMARY KEY IDENTITY(1, 1),
-	StallName NVARCHAR(50),
+    Stall_ID INT NOT NULL PRIMARY KEY IDENTITY(1, 1),
+	StallName NVARCHAR(50) NOT NULL,
 	FirstCoord INT,
 	SecondCoord INT,
 	
 );
 
 CREATE TABLE CommoditiesStalls(
-	ID INT NOT NULL PRIMARY KEY IDENTITY(1, 1),
-	CommoditiesID INT NOT NULL FOREIGN KEY REFERENCES Commodities(ID),
-	StallsID INT NOT NULL FOREIGN KEY REFERENCES Stalls(ID),
-	Price DECIMAL NOT NULL CHECK(Price > 0),
+	Commodities_Stalls_ID INT NOT NULL PRIMARY KEY IDENTITY(1, 1),
+	CommoditiesID INT NOT NULL FOREIGN KEY REFERENCES Commodities(Commodity_ID),
+	StallsID INT NOT NULL FOREIGN KEY REFERENCES Stalls(Stall_ID),
+	Price SMALLMONEY NOT NULL CHECK(Price > 0),
 	Rating INT CHECK(Rating >= 1 AND Rating <= 5),
 	TimeRegistered DateTime NOT NULL DEFAULT(SYSDATETIME()),
     Notes NVARCHAR(140)
@@ -40,5 +44,3 @@ VALUES
 	(1, 3, 21.34),
 	(3, 2, 12.12),
 	(2, 1, 5.67);
-
-
