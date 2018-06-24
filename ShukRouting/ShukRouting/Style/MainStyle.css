@@ -1,0 +1,52 @@
+﻿
+.navbar-inverse {
+    background-color: lawngreen;
+    border-color: #080808;
+}
+.tabcontent {
+    padding: 20px;
+}
+
+html,
+body {
+    margin: 0;
+    padding: 0;
+    height: 100%;
+}
+
+#container {
+    min-height: 100%;
+    position: relative;
+}
+
+#header {
+    background: #ff0;
+    padding: 10px;
+}
+
+#body {
+    padding: 10px;
+    padding-bottom: 30px; /* Which is the height of the footer */
+}
+
+#footer {
+    text-align: center;
+    padding-top: 8px;
+    position: absolute;
+    bottom: 0;
+    width: 100%;
+    height: 37px; /* Height of the footer */
+    background: #6cf;
+}
+
+a:hover,
+a:focus {
+    text-decoration: none;
+}
+
+/*.first-page{
+    text-align:center;
+}*/
+/*.container {
+            background-image: url(" ../Images/ShukImage.jpg");
+        }*/

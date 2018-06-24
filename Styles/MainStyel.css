@@ -1,0 +1,63 @@
+﻿body {
+}
+
+.tabcontent {
+    padding: 20px;
+    /*text-align:center;*/
+    /*background-color: chartreuse;*/
+}
+
+/*footer {
+    position: absolute;
+    bottom: 0;
+    width: 1152px;
+    padding:10px;
+    background-color: chartreuse;
+    text-align: center;
+    padding-top: 15px;
+    padding:10px;
+}*/
+
+html,
+body {
+    margin: 0;
+    padding: 0;
+    height: 100%;
+}
+
+#container {
+    min-height: 100%;
+    position: relative;
+}
+
+#header {
+    background: #ff0;
+    padding: 10px;
+}
+
+#body {
+    padding: 10px;
+    padding-bottom: 30px; /* Height of the footer */
+}
+
+#footer {
+    text-align: center;
+    padding-top: 8px;
+    position: absolute;
+    bottom: 0;
+    width: 100%;
+    height: 37px; /* Height of the footer */
+    background: #6cf;
+}
+
+a:hover,
+a:focus {
+    text-decoration: none;
+}
+
+/*.first-page{
+    text-align:center;
+}*/
+/*.container {
+            background-image: url(" ../Images/ShukImage.jpg");
+        }*/
