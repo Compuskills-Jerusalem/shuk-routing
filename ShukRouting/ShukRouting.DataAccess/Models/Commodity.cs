@@ -8,7 +8,7 @@ namespace ShukRouting.DataAccess.Models
 {
     public class Commodity
     {
-        public int ID { get; set; }
+        public int CommodityID { get; set; }
         public string CommodityName { get; set; }
     }
 }

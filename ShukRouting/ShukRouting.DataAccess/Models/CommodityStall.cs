@@ -8,7 +8,7 @@ namespace ShukRouting.DataAccess.Models
 {
     public class CommodityStall
     {
-        public int ID { get; set; }
+        public int CommodityStallID { get; set; }
 
         public int CommodityID { get; set; }
         public virtual Commodity Commodity { get; set; }

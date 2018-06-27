@@ -21,20 +21,32 @@ namespace ShukRouting.Controllers
         }
 
         // GET: Stall/Details/5
-        public ActionResult Details(int? id)
+        [HttpGet]
+        public PartialViewResult Details()
         {
-            var result = ctx.Stalls
-                              
-                              .Select(r => new StallModel
-                              {
-                                  StallID = r.ID,
-                                  StallName = r.StallName,
-                                  FirstCoord = r.FirstCoord,
-                                  SecondCoord = r.SecondCoord,
-                                  CommodityID = r.ID
-                              });
-            return View(result);
+            //var result = ctx.Stalls
+            //   stall in stalls
+            //            .Select(r => new StallModel
+            //            {
+            //                StallID = r.ID,
+            //                StallName = r.StallName,
+            //                FirstCoord = r.FirstCoord,
+            //                SecondCoord = r.SecondCoord,
+            //                CommodityID = r.ID
+            //            });
+            var result = from stall in ctx.Stalls
+                         from com in ctx.Commodities
+                         where stall.StallID == 1
+                         select new StallModel
+                         {
+                             StallID = stall.StallID,
+                            StallName = stall.StallName,
+                            FirstCoord = stall.FirstCoord,
+                            SecondCoord=stall.SecondCoord,
+                            CommodityID = com.CommodityID
+                         };
 
+              return PartialView(result);
         }
 
         // GET: Stall/Create

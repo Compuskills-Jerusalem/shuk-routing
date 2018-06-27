@@ -25,28 +25,36 @@ body {
 }
 
 #body {
-    padding: 10px;
-    padding-bottom: 30px; /* Which is the height of the footer */
+    padding-top: 60px;
+    padding-bottom: 60px; /* Which is the height of the footer */
 }
 
 #footer {
     text-align: center;
     padding-top: 8px;
     position: absolute;
-    bottom: 0;
+    bottom: 4px;
     width: 100%;
+    left: 6px;
     height: 37px; /* Height of the footer */
     background: #6cf;
+  border-bottom: 2px solid royalblue;
 }
 
 a:hover,
 a:focus {
     text-decoration: none;
 }
-
-/*.first-page{
-    text-align:center;
-}*/
-/*.container {
-            background-image: url(" ../Images/ShukImage.jpg");
-        }*/
+#input-group {
+    background-color: cadetblue;
+    padding: 17px;
+    top:21px;
+}
+#partialDetails {
+    background-color:yellow;
+    border:7px solid green;
+    bottom: 17px;
+}
+.navbar-form {
+    margin-left: 247px;
+   }
