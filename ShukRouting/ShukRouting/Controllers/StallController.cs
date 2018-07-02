@@ -24,29 +24,18 @@ namespace ShukRouting.Controllers
         [HttpGet]
         public PartialViewResult Details()
         {
-            //var result = ctx.Stalls
-            //   stall in stalls
-            //            .Select(r => new StallModel
-            //            {
-            //                StallID = r.ID,
-            //                StallName = r.StallName,
-            //                FirstCoord = r.FirstCoord,
-            //                SecondCoord = r.SecondCoord,
-            //                CommodityID = r.ID
-            //            });
-            var result = from stall in ctx.Stalls
-                         from com in ctx.Commodities
-                         where stall.StallID == 1
-                         select new StallModel
-                         {
-                             StallID = stall.StallID,
-                            StallName = stall.StallName,
-                            FirstCoord = stall.FirstCoord,
-                            SecondCoord=stall.SecondCoord,
-                            CommodityID = com.CommodityID
-                         };
+            var result = ctx.Stalls
+              
+                        .Select(r => new StallModel
+                        {
+                            StallID = r.StallID,
+                            StallName = r.StallName,
+                            FirstCoord = r.FirstCoord,
+                            SecondCoord = r.SecondCoord,
+                            
+                        });
 
-              return PartialView(result);
+            return PartialView(result);
         }
 
         // GET: Stall/Create
@@ -55,21 +44,24 @@ namespace ShukRouting.Controllers
             return View();
         }
 
-        // POST: Stall/Create
         [HttpPost]
-        public ActionResult Create(FormCollection collection)
+        [ValidateAntiForgeryToken]
+        public ActionResult Create(Stall Stall)
         {
-            try
+            if (ModelState.IsValid)
             {
-                // TODO: Add insert logic here
 
-                return RedirectToAction("Index");
+                ctx.Stalls.Add(Stall);
+                ctx.SaveChanges();
+
+
+                return RedirectToAction("Details");
             }
-            catch
-            {
-                return View();
-            }
+
+            return View(Stall);
         }
+
+        
 
         // GET: Stall/Edit/5
         public ActionResult Edit(int id)

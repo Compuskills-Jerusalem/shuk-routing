@@ -11,6 +11,6 @@ namespace ShukRouting.Models
         public string StallName { get; set; }
         public int FirstCoord { get; set; }
         public int SecondCoord { get; set; }
-        public int CommodityID { get; set; }
+        
     }
 }
