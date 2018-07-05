@@ -22,20 +22,19 @@ namespace ShukRouting.Controllers
 
         // GET: Stall/Details/5
         [HttpGet]
-        public PartialViewResult Details()
+        public ActionResult Details(string stallName)
         {
             var result = ctx.Stalls
-              
-                        .Select(r => new StallModel
+                         .Where(s => s.StallName == stallName)
+                        .Select(s => new StallModel
                         {
-                            StallID = r.StallID,
-                            StallName = r.StallName,
-                            FirstCoord = r.FirstCoord,
-                            SecondCoord = r.SecondCoord,
-                            
+                            StallID = s.StallID,
+                            StallName = s.StallName,
+                            FirstCoord = s.FirstCoord,
+                            SecondCoord = s.SecondCoord,
                         });
 
-            return PartialView(result);
+            return View(result);
         }
 
         // GET: Stall/Create
@@ -54,14 +53,13 @@ namespace ShukRouting.Controllers
                 ctx.Stalls.Add(Stall);
                 ctx.SaveChanges();
 
-
-                return RedirectToAction("Details");
+              
+                return RedirectToAction("About", "Home");
             }
-
-            return View(Stall);
+             return View(Stall);
         }
 
-        
+
 
         // GET: Stall/Edit/5
         public ActionResult Edit(int id)
@@ -115,5 +113,6 @@ namespace ShukRouting.Controllers
             }
             base.Dispose(disposing);
         }
+
     }
 }
