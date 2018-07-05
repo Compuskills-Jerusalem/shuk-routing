@@ -4,7 +4,7 @@ using System.Linq;
 using System.Web;
 using System.Web.Mvc;
 
-namespace ShukRouting.Controllers
+namespace ShukRouting.Mvc.Controllers
 {
     public class HomeController : Controller
     {

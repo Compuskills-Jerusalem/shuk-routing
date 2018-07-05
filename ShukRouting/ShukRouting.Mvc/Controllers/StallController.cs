@@ -1,6 +1,6 @@
 ﻿using ShukRouting.DataAccess.DataSource;
 using ShukRouting.DataAccess.Models;
-using ShukRouting.Models;
+using ShukRouting.Mvc.Models;
 using System;
 using System.Collections;
 using System.Collections.Generic;
@@ -8,7 +8,7 @@ using System.Linq;
 using System.Web;
 using System.Web.Mvc;
 
-namespace ShukRouting.Controllers
+namespace ShukRouting.Mvc.Controllers
 {
 
     public class StallController : Controller
