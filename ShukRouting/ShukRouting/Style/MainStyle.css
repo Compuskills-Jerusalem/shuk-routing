@@ -9,6 +9,7 @@
 
 html,
 body {
+    background-color: olivedrab;
     margin: 0;
     padding: 0;
     height: 100%;
@@ -33,12 +34,11 @@ body {
     text-align: center;
     padding-top: 8px;
     position: absolute;
-    bottom: 4px;
+    bottom: 10px;
     width: 100%;
-    left: 6px;
+    left: 0px;
     height: 37px; /* Height of the footer */
-    background: #6cf;
-  border-bottom: 2px solid royalblue;
+    background: #82bd424f;
 }
 
 a:hover,
@@ -51,10 +51,11 @@ a:focus {
     top:21px;
 }
 #partialDetails {
-    background-color:yellow;
-    border:7px solid green;
-    bottom: 17px;
+    border: 9px solid lawngreen;
 }
 .navbar-form {
     margin-left: 247px;
    }
+h2 {
+    margin-left: 20px;
+}
