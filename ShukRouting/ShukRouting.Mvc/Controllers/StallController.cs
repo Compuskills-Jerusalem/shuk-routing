@@ -22,17 +22,16 @@ namespace ShukRouting.Mvc.Controllers
 
         // GET: Stall/Details/5
         [HttpGet]
-        public ActionResult Details(string stallName)
+        public ActionResult Details(string Name)
         {
             var result = ctx.Stalls
-                         .Where(s => s.StallName == stallName)
-                        .Select(s => new StallModel
-                        {
-                            StallID = s.StallID,
-                            StallName = s.StallName,
-                            FirstCoord = s.FirstCoord,
-                            SecondCoord = s.SecondCoord,
-                        });
+                         .Select(s => new StallModel
+                         {
+                             StallID = s.StallID,
+                             StallName = s.StallName,
+                             FirstCoord = s.FirstCoord,
+                             SecondCoord = s.SecondCoord,
+                         });
 
             return View(result);
         }
@@ -53,10 +52,10 @@ namespace ShukRouting.Mvc.Controllers
                 ctx.Stalls.Add(Stall);
                 ctx.SaveChanges();
 
-              
+
                 return RedirectToAction("About", "Home");
             }
-             return View(Stall);
+            return View(Stall);
         }
 
 
