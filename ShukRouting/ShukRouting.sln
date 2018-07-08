@@ -3,7 +3,7 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 15
 VisualStudioVersion = 15.0.27130.2020
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ShukRouting", "ShukRouting\ShukRouting.csproj", "{17A4C2AA-72BA-4E82-B39E-D6A235591FC1}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ShukRouting.Mvc", "ShukRouting.Mvc\ShukRouting.Mvc.csproj", "{17A4C2AA-72BA-4E82-B39E-D6A235591FC1}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ShukRouting.DataAccess", "ShukRouting.DataAccess\ShukRouting.DataAccess.csproj", "{1BAAB480-C169-4ED8-A21F-320B9FF23716}"
 EndProject

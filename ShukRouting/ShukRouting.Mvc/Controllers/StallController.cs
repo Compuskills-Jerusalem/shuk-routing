@@ -1,6 +1,6 @@
 ﻿using ShukRouting.DataAccess.DataSource;
 using ShukRouting.DataAccess.Models;
-using ShukRouting.Models;
+using ShukRouting.Mvc.Models;
 using System;
 using System.Collections;
 using System.Collections.Generic;
@@ -8,7 +8,7 @@ using System.Linq;
 using System.Web;
 using System.Web.Mvc;
 
-namespace ShukRouting.Controllers
+namespace ShukRouting.Mvc.Controllers
 {
 
     public class StallController : Controller
@@ -38,9 +38,26 @@ namespace ShukRouting.Controllers
 
 
 
+<<<<<<< HEAD:ShukRouting/ShukRouting/Controllers/StallController.cs
         public ActionResult Details()
         {
             return View(StallDetails());
+=======
+        // GET: Stall/Details/5
+        [HttpGet]
+        public ActionResult Details(string Name)
+        {
+            var result = ctx.Stalls
+                         .Select(s => new StallModel
+                         {
+                             StallID = s.StallID,
+                             StallName = s.StallName,
+                             FirstCoord = s.FirstCoord,
+                             SecondCoord = s.SecondCoord,
+                         });
+
+            return View(result);
+>>>>>>> f8dba0f28e9f7ed9fbd0c9cce82d00e217b91046:ShukRouting/ShukRouting.Mvc/Controllers/StallController.cs
         }
 
 
@@ -61,12 +78,16 @@ namespace ShukRouting.Controllers
                 ctx.SaveChanges();
 
 
-                return RedirectToAction("Details");
+                return RedirectToAction("About", "Home");
             }
-
             return View(Stall);
         }
 
+<<<<<<< HEAD:ShukRouting/ShukRouting/Controllers/StallController.cs
+=======
+
+
+>>>>>>> f8dba0f28e9f7ed9fbd0c9cce82d00e217b91046:ShukRouting/ShukRouting.Mvc/Controllers/StallController.cs
         // GET: Stall/Edit/5
         public ActionResult Edit(int id)
         {
@@ -119,5 +140,6 @@ namespace ShukRouting.Controllers
             }
             base.Dispose(disposing);
         }
+
     }
 }
