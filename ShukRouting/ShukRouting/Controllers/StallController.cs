@@ -13,30 +13,36 @@ namespace ShukRouting.Controllers
 
     public class StallController : Controller
     {
+
         private ShukRoutingContext ctx = new ShukRoutingContext();
+
         // GET: Stall
         public ActionResult Index()
         {
             return View();
         }
-
-        // GET: Stall/Details/5
-        [HttpGet]
-        public PartialViewResult Details()
+        public IQueryable StallDetails()
         {
-            var result = ctx.Stalls
-              
-                        .Select(r => new StallModel
-                        {
-                            StallID = r.StallID,
-                            StallName = r.StallName,
-                            FirstCoord = r.FirstCoord,
-                            SecondCoord = r.SecondCoord,
-                            
-                        });
+            var result = ctx.CommoditiesStalls
+                .Select(r => new StallModel
+                {
 
-            return PartialView(result);
+                    StallID = r.StallID,
+                    StallName = r.Stall.StallName,
+                    FirstCoord = r.Stall.FirstCoord,
+                    SecondCoord = r.Stall.SecondCoord,
+
+                });
+            return result;
         }
+
+
+
+        public ActionResult Details()
+        {
+            return View(StallDetails());
+        }
+
 
         // GET: Stall/Create
         public ActionResult Create()
@@ -60,8 +66,6 @@ namespace ShukRouting.Controllers
 
             return View(Stall);
         }
-
-        
 
         // GET: Stall/Edit/5
         public ActionResult Edit(int id)

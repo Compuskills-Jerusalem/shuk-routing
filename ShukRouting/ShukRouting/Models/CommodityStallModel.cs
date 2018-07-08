@@ -1,22 +1,17 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.ComponentModel.DataAnnotations.Schema;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+using System.Web;
 
-namespace ShukRouting.DataAccess.Models
+namespace ShukRouting.Models
 {
-    
-    public class CommodityStall
+    public class CommodityStallModel
     {
-        public int CommodityStallID { get; set; }
-
         public int CommodityID { get; set; }
-        public virtual Commodity Commodity { get; set; }
+        public string CommodityName { get; set; }
 
         public int StallID { get; set; }
-        public virtual Stall Stall { get; set; }
+        public string StallName { get; set; }
 
         public Decimal Price { get; set; }
         public int? Rating { get; set; }
