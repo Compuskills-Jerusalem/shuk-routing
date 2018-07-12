@@ -1,6 +1,6 @@
 ﻿
 .navbar-inverse {
-    background-color: lawngreen;
+    background-color: lightsalmon;
     border-color: #080808;
 }
 .tabcontent {
@@ -9,7 +9,7 @@
 
 html,
 body {
-    background-color: olivedrab;
+    background-color: peachpuff;
     margin: 0;
     padding: 0;
     height: 100%;
@@ -38,7 +38,7 @@ body {
     width: 100%;
     left: 0px;
     height: 37px; /* Height of the footer */
-    background: #82bd424f;
+    background: lightsalmon;
 }
 
 a:hover,
@@ -49,9 +49,6 @@ a:focus {
     background-color: cadetblue;
     padding: 17px;
     top:21px;
-}
-#partialDetails {
-    border: 9px solid lawngreen;
 }
 .navbar-form {
     margin-left: 247px;

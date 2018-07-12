@@ -1,57 +1,51 @@
 ﻿@model IEnumerable<ShukRouting.Mvc.Models.StallModel>
 
-@*@{
+@{
         ViewBag.Title = "Details";
-    }*@
-<div id="partialDetails">
-    <h2>details</h2>
+    }
+<h2>Details</h2>
 
-    <div>
-        @*<h4>Stall Model</h4>*@
-        <hr />
-        @foreach (var item in Model)
-        {
-            <dl class="dl-horizontal">
-                <dt>
-                    @Html.DisplayNameFor(model => model.StallID)
-                </dt>
+<div>
+    <hr />
+    @foreach (var item in Model)
+    {
+        <dl class="dl-horizontal">
+            <dt>
+                @Html.DisplayNameFor(model => model.StallID)
+            </dt>
 
-                <dd>
-                    @Html.DisplayFor(model => item.StallID)
-                </dd>
+            <dd>
+                @Html.DisplayFor(model => item.StallID)
+            </dd>
 
-                <dt>
-                    @Html.DisplayNameFor(model => model.StallName)
-                </dt>
+            <dt>
+                @Html.DisplayNameFor(model => model.StallName)
+            </dt>
 
-                <dd>
-                    @Html.DisplayFor(model => item.StallName)
-                </dd>
+            <dd>
+                @Html.DisplayFor(model => item.StallName)
+            </dd>
 
-                <dt>
-                    @Html.DisplayNameFor(model => model.FirstCoord)
-                </dt>
+            <dt>
+                @Html.DisplayNameFor(model => model.FirstCoord)
+            </dt>
 
-                <dd>
-                    @Html.DisplayFor(model => item.FirstCoord)
-                </dd>
+            <dd>
+                @Html.DisplayFor(model => item.FirstCoord)
+            </dd>
 
-                <dt>
-                    @Html.DisplayNameFor(model => model.SecondCoord)
-                </dt>
+            <dt>
+                @Html.DisplayNameFor(model => model.SecondCoord)
+            </dt>
 
-                <dd>
-                    @Html.DisplayFor(model => item.SecondCoord)
-                </dd>
-
-                
-
-            </dl>
-        }
-    </div>
-    <p>
-        @Html.ActionLink("Edit", "Edit", new { /* id = Model.PrimaryKey */ }) |
-        @Html.ActionLink("Back to List", "Index")
-    </p>
+            <dd>
+                @Html.DisplayFor(model => item.SecondCoord)
+            </dd>
+        </dl>
+    }
 </div>
-@*<p>HHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHH</p>*@
+<p>
+    @Html.ActionLink("Edit", "Edit", new { /* id = Model.PrimaryKey */ }) |
+    @Html.ActionLink("Back to List", "Index")
+</p>
+

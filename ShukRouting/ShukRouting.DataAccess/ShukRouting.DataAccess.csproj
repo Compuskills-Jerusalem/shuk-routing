@@ -49,6 +49,7 @@
   <ItemGroup>
     <Compile Include="DataSource\Build_Database.cs" />
     <Compile Include="DataSource\ShukRoutingContext.cs" />
+    <Compile Include="Initializers\DropAndSeedInializers.cs" />
     <Compile Include="Models\Commodity.cs" />
     <Compile Include="Models\CommodityStall.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

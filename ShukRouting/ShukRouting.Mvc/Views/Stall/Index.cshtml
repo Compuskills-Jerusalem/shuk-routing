@@ -1,0 +1,18 @@
+﻿@model ShukRouting.Mvc.Models.StallModel
+
+@{
+    ViewBag.Title = "Index";
+
+    List<SelectListItem> list = new List<SelectListItem>();
+    for (int i = 0; i < 20; i++)
+    {
+        SelectListItem one = new SelectListItem() { Text = i.ToString(), Value = i.ToString() };
+        list.Add(one);
+    }
+}
+
+<h2>Index</h2>
+
+@Html.DropDownListFor(model => model.StallName, list)
+
+
