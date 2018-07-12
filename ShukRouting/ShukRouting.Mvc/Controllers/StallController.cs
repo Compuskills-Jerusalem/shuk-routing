@@ -38,11 +38,11 @@ namespace ShukRouting.Mvc.Controllers
 
 
 
-<<<<<<< HEAD:ShukRouting/ShukRouting/Controllers/StallController.cs
         public ActionResult Details()
         {
             return View(StallDetails());
-=======
+        }
+
         // GET: Stall/Details/5
         [HttpGet]
         public ActionResult Details(string Name)
@@ -57,7 +57,6 @@ namespace ShukRouting.Mvc.Controllers
                          });
 
             return View(result);
->>>>>>> f8dba0f28e9f7ed9fbd0c9cce82d00e217b91046:ShukRouting/ShukRouting.Mvc/Controllers/StallController.cs
         }
 
 
@@ -83,11 +82,6 @@ namespace ShukRouting.Mvc.Controllers
             return View(Stall);
         }
 
-<<<<<<< HEAD:ShukRouting/ShukRouting/Controllers/StallController.cs
-=======
-
-
->>>>>>> f8dba0f28e9f7ed9fbd0c9cce82d00e217b91046:ShukRouting/ShukRouting.Mvc/Controllers/StallController.cs
         // GET: Stall/Edit/5
         public ActionResult Edit(int id)
         {
