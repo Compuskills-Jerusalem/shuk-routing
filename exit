@@ -1,0 +1,437 @@
+[1mdiff --git a/ShukRouting/ShukRouting.DataAccess/Models/Stall.cs b/ShukRouting/ShukRouting.DataAccess/Models/Stall.cs[m
+[1mindex 99a9cfd..1941bd6 100644[m
+[1m--- a/ShukRouting/ShukRouting.DataAccess/Models/Stall.cs[m
+[1m+++ b/ShukRouting/ShukRouting.DataAccess/Models/Stall.cs[m
+[36m@@ -1,5 +1,6 @@[m
+ ﻿using System;[m
+ using System.Collections.Generic;[m
+[32m+[m[32musing System.ComponentModel.DataAnnotations;[m
+ using System.Linq;[m
+ using System.Text;[m
+ using System.Threading.Tasks;[m
+[36m@@ -9,7 +10,11 @@[m [mnamespace ShukRouting.DataAccess.Models[m
+    public class Stall[m
+     {[m
+         public int StallID { get; set; }[m
+[32m+[m
+[32m+[m[32m        [Required][m
+[32m+[m[32m        [MaxLength(50)][m
+         public string StallName { get; set; }[m
+[32m+[m
+         public int FirstCoord { get; set; }[m
+         public int SecondCoord { get; set; }[m
+     }[m
+[1mdiff --git a/ShukRouting/ShukRouting.DataAccess/ShukRouting.DataAccess.csproj b/ShukRouting/ShukRouting.DataAccess/ShukRouting.DataAccess.csproj[m
+[1mindex 482bad7..ff6b32b 100644[m
+[1m--- a/ShukRouting/ShukRouting.DataAccess/ShukRouting.DataAccess.csproj[m
+[1m+++ b/ShukRouting/ShukRouting.DataAccess/ShukRouting.DataAccess.csproj[m
+[36m@@ -49,6 +49,7 @@[m
+   <ItemGroup>[m
+     <Compile Include="DataSource\Build_Database.cs" />[m
+     <Compile Include="DataSource\ShukRoutingContext.cs" />[m
+[32m+[m[32m    <Compile Include="Initializers\DropAndSeedInializers.cs" />[m
+     <Compile Include="Models\Commodity.cs" />[m
+     <Compile Include="Models\CommodityStall.cs" />[m
+     <Compile Include="Properties\AssemblyInfo.cs" />[m
+[1mdiff --git a/ShukRouting/ShukRouting.Mvc/Controllers/StallController.cs b/ShukRouting/ShukRouting.Mvc/Controllers/StallController.cs[m
+[1mindex eced177..a4dd39c 100644[m
+[1m--- a/ShukRouting/ShukRouting.Mvc/Controllers/StallController.cs[m
+[1m+++ b/ShukRouting/ShukRouting.Mvc/Controllers/StallController.cs[m
+[36m@@ -1,5 +1,6 @@[m
+ ﻿using ShukRouting.DataAccess.DataSource;[m
+ using ShukRouting.DataAccess.Models;[m
+[32m+[m[32musing ShukRouting.Mvc.Data;[m
+ using ShukRouting.Mvc.Models;[m
+ using System;[m
+ using System.Collections;[m
+[36m@@ -22,9 +23,10 @@[m [mnamespace ShukRouting.Mvc.Controllers[m
+ [m
+         // GET: Stall/Details/5[m
+         [HttpGet][m
+[31m-        public ActionResult Details(string Name)[m
+[32m+[m[32m        public ActionResult Details(string stallName)[m
+         {[m
+             var result = ctx.Stalls[m
+[32m+[m[32m                         .Where(s => s.StallName == stallName)[m
+                          .Select(s => new StallModel[m
+                          {[m
+                              StallID = s.StallID,[m
+[36m@@ -37,11 +39,18 @@[m [mnamespace ShukRouting.Mvc.Controllers[m
+         }[m
+ [m
+         // GET: Stall/Create[m
+[31m-        public ActionResult Create()[m
+[32m+[m[32m         public ActionResult Create()[m
+         {[m
+             return View();[m
+         }[m
+ [m
+[32m+[m[32m        public ActionResult CreateStall()[m
+[32m+[m[32m        {[m
+[32m+[m[32m            var repo = new StallsRepository();[m
+[32m+[m[32m            var stallNamesList = repo.CreateStall();[m
+[32m+[m[32m            return View(stallNamesList);[m
+[32m+[m[32m        }[m
+[32m+[m
+         [HttpPost][m
+         [ValidateAntiForgeryToken][m
+         public ActionResult Create(Stall Stall)[m
+[36m@@ -52,8 +61,7 @@[m [mnamespace ShukRouting.Mvc.Controllers[m
+                 ctx.Stalls.Add(Stall);[m
+                 ctx.SaveChanges();[m
+ [m
+[31m-[m
+[31m-                return RedirectToAction("About", "Home");[m
+[32m+[m[32m                return RedirectToAction("Index", "Home");[m
+             }[m
+             return View(Stall);[m
+         }[m
+[1mdiff --git a/ShukRouting/ShukRouting.Mvc/Global.asax.cs b/ShukRouting/ShukRouting.Mvc/Global.asax.cs[m
+[1mindex fa972e3..f101040 100644[m
+[1m--- a/ShukRouting/ShukRouting.Mvc/Global.asax.cs[m
+[1m+++ b/ShukRouting/ShukRouting.Mvc/Global.asax.cs[m
+[36m@@ -1,5 +1,7 @@[m
+[31m-﻿using System;[m
+[32m+[m[32m﻿using ShukRouting.DataAccess.DataSource;[m
+[32m+[m[32musing System;[m
+ using System.Collections.Generic;[m
+[32m+[m[32musing System.Data.Entity;[m
+ using System.Linq;[m
+ using System.Web;[m
+ using System.Web.Mvc;[m
+[36m@@ -16,6 +18,9 @@[m [mnamespace ShukRouting.Mvc[m
+             FilterConfig.RegisterGlobalFilters(GlobalFilters.Filters);[m
+             RouteConfig.RegisterRoutes(RouteTable.Routes);[m
+             BundleConfig.RegisterBundles(BundleTable.Bundles);[m
+[31m-        }[m
+[32m+[m
+[32m+[m[32m        //    Database.SetInitializer(new CreateDatabaseIfNotExists<ShukRoutingContext>());[m
+[32m+[m[32m        //    Database.SetInitializer(new DropCreateDatabaseAlways<ShukRoutingContext>());[m
+[32m+[m[32m       }[m
+     }[m
+ }[m
+[1mdiff --git a/ShukRouting/ShukRouting.Mvc/ShukRouting.Mvc.csproj b/ShukRouting/ShukRouting.Mvc/ShukRouting.Mvc.csproj[m
+[1mindex bd6e1a0..6734ddc 100644[m
+[1m--- a/ShukRouting/ShukRouting.Mvc/ShukRouting.Mvc.csproj[m
+[1m+++ b/ShukRouting/ShukRouting.Mvc/ShukRouting.Mvc.csproj[m
+[36m@@ -150,9 +150,11 @@[m
+     <Compile Include="App_Start\RouteConfig.cs" />[m
+     <Compile Include="Controllers\HomeController.cs" />[m
+     <Compile Include="Controllers\StallController.cs" />[m
+[32m+[m[32m    <Compile Include="Data\StallsRepository.cs" />[m
+     <Compile Include="Global.asax.cs">[m
+       <DependentUpon>Global.asax</DependentUpon>[m
+     </Compile>[m
+[32m+[m[32m    <Compile Include="Models\StallCreateModel.cs" />[m
+     <Compile Include="Models\StallModel.cs" />[m
+     <Compile Include="Properties\AssemblyInfo.cs" />[m
+   </ItemGroup>[m
+[36m@@ -235,6 +237,8 @@[m
+     <Content Include="Views\Home\Index.cshtml" />[m
+     <Content Include="Scripts\version.json" />[m
+     <Content Include="Views\Stall\Create.cshtml" />[m
+[32m+[m[32m    <Content Include="Views\Stall\Index.cshtml" />[m
+[32m+[m[32m    <Content Include="Views\Stall\CreateStall.cshtml" />[m
+   </ItemGroup>[m
+   <ItemGroup>[m
+     <Folder Include="App_Data\" />[m
+[1mdiff --git a/ShukRouting/ShukRouting.Mvc/Style/MainStyle.css b/ShukRouting/ShukRouting.Mvc/Style/MainStyle.css[m
+[1mindex 683e1d2..1129e1b 100644[m
+[1m--- a/ShukRouting/ShukRouting.Mvc/Style/MainStyle.css[m
+[1m+++ b/ShukRouting/ShukRouting.Mvc/Style/MainStyle.css[m
+[36m@@ -1,6 +1,6 @@[m
+ ﻿[m
+ .navbar-inverse {[m
+[31m-    background-color: lawngreen;[m
+[32m+[m[32m    background-color: lightsalmon;[m
+     border-color: #080808;[m
+ }[m
+ .tabcontent {[m
+[36m@@ -9,7 +9,7 @@[m
+ [m
+ html,[m
+ body {[m
+[31m-    background-color: olivedrab;[m
+[32m+[m[32m    background-color: peachpuff;[m
+     margin: 0;[m
+     padding: 0;[m
+     height: 100%;[m
+[36m@@ -38,7 +38,7 @@[m [mbody {[m
+     width: 100%;[m
+     left: 0px;[m
+     height: 37px; /* Height of the footer */[m
+[31m-    background: #82bd424f;[m
+[32m+[m[32m    background: lightsalmon;[m
+ }[m
+ [m
+ a:hover,[m
+[36m@@ -50,9 +50,6 @@[m [ma:focus {[m
+     padding: 17px;[m
+     top:21px;[m
+ }[m
+[31m-#partialDetails {[m
+[31m-    border: 9px solid lawngreen;[m
+[31m-}[m
+ .navbar-form {[m
+     margin-left: 247px;[m
+    }[m
+[1mdiff --git a/ShukRouting/ShukRouting.Mvc/Views/Home/About.cshtml b/ShukRouting/ShukRouting.Mvc/Views/Home/About.cshtml[m
+[1mindex 9deafdd..e33b3dc 100644[m
+[1m--- a/ShukRouting/ShukRouting.Mvc/Views/Home/About.cshtml[m
+[1m+++ b/ShukRouting/ShukRouting.Mvc/Views/Home/About.cshtml[m
+[36m@@ -1,7 +1,9 @@[m
+ ﻿@*@{[m
+[31m-    ViewBag.Title = "About";[m
+[31m-}[m
+[31m-<h2>@ViewBag.Title.</h2>[m
+[31m-<h3>@ViewBag.Message</h3>*@[m
+[32m+[m[32m        ViewBag.Title = "About";[m
+[32m+[m[32m    }[m
+[32m+[m[32m    <h2>@ViewBag.Title.</h2>[m
+[32m+[m[32m    <h3>@ViewBag.Message</h3>*@[m
+ [m
+[31m-<p>You created a new Stall and you were redirected to Home/About .</p>[m
+[32m+[m[32m<div class="jumbotron">[m
+[32m+[m[32m    <p>You were redirected to Home/About .</p>[m
+[32m+[m[32m</div>[m
+\ No newline at end of file[m
+[1mdiff --git a/ShukRouting/ShukRouting.Mvc/Views/Home/Index.cshtml b/ShukRouting/ShukRouting.Mvc/Views/Home/Index.cshtml[m
+[1mindex 1370eb5..d03b804 100644[m
+[1m--- a/ShukRouting/ShukRouting.Mvc/Views/Home/Index.cshtml[m
+[1m+++ b/ShukRouting/ShukRouting.Mvc/Views/Home/Index.cshtml[m
+[36m@@ -1,12 +1,35 @@[m
+ ﻿@{[m
+[31m-        ViewBag.Title = "Index";[m
+[31m-    }[m
+[31m-<div id="index">[m
+[31m-    <p>[m
+[31m-        Welcome to the new Shuk Routing program <br /> Here you will get your best results for your shuk shoppings !![m
+[31m-    </p>[m
+[32m+[m[32m    ViewBag.Title = "Home Page";[m
+[32m+[m[32m}[m
+[32m+[m
+[32m+[m[32m<div class="jumbotron">[m
+[32m+[m[32m    <h1>Shuk Routing</h1>[m
+[32m+[m[32m    <p class="lead">Shuk Routing is designed to get you the best out of you'r shuk shopping's !!</p>[m
+[32m+[m[32m    <p class="btn btn-primary btn-lg" style="background-color:#eeeeee">@Html.ActionLink("More","About","Home")</p>[m
+[32m+[m[32m</div>[m
+[32m+[m
+[32m+[m[32m<div class="row">[m
+[32m+[m[32m    <div class="col-md-4">[m
+[32m+[m[32m        <h2>Getting started</h2>[m
+[32m+[m[32m        <p>[m
+[32m+[m[32m            ASP.NET MVC gives you a powerful, patterns-based way to build dynamic websites that[m
+[32m+[m[32m            enables a clean separation of concerns and gives you full control over markup[m
+[32m+[m[32m            for enjoyable, agile development.[m
+[32m+[m[32m        </p>[m
+[32m+[m[32m        <p><a class="btn btn-default" href="https://go.microsoft.com/fwlink/?LinkId=301865">Learn more &raquo;</a></p>[m
+[32m+[m[32m    </div>[m
+[32m+[m[32m    <div class="col-md-4">[m
+[32m+[m[32m        <h2>Get more libraries</h2>[m
+[32m+[m[32m        <p>NuGet is a free Visual Studio extension that makes it easy to add, remove, and update libraries and tools in Visual Studio projects.</p>[m
+[32m+[m[32m        <p><a class="btn btn-default" href="https://go.microsoft.com/fwlink/?LinkId=301866">Learn more &raquo;</a></p>[m
+[32m+[m[32m    </div>[m
+[32m+[m[32m    <div class="col-md-4">[m
+[32m+[m[32m        <h2>Web Hosting</h2>[m
+[32m+[m[32m        <p>You can easily find a web hosting company that offers the right mix of features and price for your applications.</p>[m
+[32m+[m[32m        <p><a class="btn btn-default" href="https://go.microsoft.com/fwlink/?LinkId=301867">Learn more &raquo;</a></p>[m
+[32m+[m[32m    </div>[m
+ </div>[m
+[31m-  [m
+[32m+[m
+ [m
+ [m
+ [m
+[1mdiff --git a/ShukRouting/ShukRouting.Mvc/Views/Shared/_Layout.cshtml b/ShukRouting/ShukRouting.Mvc/Views/Shared/_Layout.cshtml[m
+[1mindex 9593992..5d8e63c 100644[m
+[1m--- a/ShukRouting/ShukRouting.Mvc/Views/Shared/_Layout.cshtml[m
+[1m+++ b/ShukRouting/ShukRouting.Mvc/Views/Shared/_Layout.cshtml[m
+[36m@@ -22,11 +22,11 @@[m
+                         type: "GET",[m
+                         url: "/Stall/Details",[m
+                         contentType: "application/json; charset=utf-8",[m
+[31m-                        data: { stallName: $("#itemInput").val() },[m
+[32m+[m[32m                       data: { stallName: $("#itemInput").val() },[m
+                         dataType: "html",[m
+                         success: function (result, status, xhr) {[m
+[31m-                            $("#inerBody").html(result);[m
+[31m-                        },[m
+[32m+[m[32m                            $("#body").html(result);[m
+[32m+[m[32m                         },[m
+                         error: function (xhr, status, error) {[m
+                             alert("it was nooot a  success !!!");[m
+                         }[m
+[36m@@ -37,6 +37,7 @@[m
+         });[m
+     </script>[m
+ </head>[m
+[32m+[m
+ <body>[m
+     <div class="navbar navbar-inverse navbar-fixed-top">[m
+         <div class="container">[m
+[36m@@ -54,36 +55,24 @@[m
+                     <li>@Html.ActionLink("Home", "Index", "Home")</li>[m
+                     <li>@Html.ActionLink("About", "About", "Home")</li>[m
+                     <li>@Html.ActionLink("Contact", "Contact", "Home")</li>[m
+[31m-                    <li>@Html.ActionLink("Create Stall", "Create", "Stall")</li>[m
+[32m+[m[32m                    <li>@Html.ActionLink("Add Stall", "Create", "Stall")</li>[m
+                 </ul>[m
+                 <form class="navbar-form navbar-left" role="search">[m
+                     <div class="form-group">[m
+[31m-                        <input id="itemInput" type="text" class="form-control" placeholder="Search by stall name.">[m
+[32m+[m[32m                        <input id="itemInput" type="text" class="form-control" placeholder="Search by item name.">[m
+                     </div>[m
+                     <button id="search" type="submit" class="btn btn-default">Search</button>[m
+[31m-                    @*<button type="submit" class="btn btn-default">[m
+[31m-                        @{[m
+[31m-                            @Ajax.ActionLink("Create", "Create", "Stall", new AjaxOptions[m
+[31m-                            {[m
+[31m-                                UpdateTargetId = "par",[m
+[31m-                                InsertionMode = InsertionMode.Replace,[m
+[31m-                                HttpMethod = "GET"[m
+[31m-                            })[m
+[31m-                        }[m
+[31m-                    </button>*@[m
+                  </form>[m
+             </div>[m
+         </div>[m
+     </div>[m
+     <div class="container body-content" id="container">[m
+         <div id="body">[m
+[31m-            <div id="inerBody">[m
+[31m-                @RenderBody()[m
+[31m-            </div>[m
+[31m-        </div>[m
+[32m+[m[32m              @RenderBody()[m
+[32m+[m[32m         </div>[m
+         <div id="footer">[m
+             <footer>[m
+[31m-                <p> There's nothing better then the shuk with shuk routing !!!</p>[m
+[32m+[m[32m                <p> We are here to help you get the best out of your shopping !!!</p>[m
+             </footer>[m
+         </div>[m
+     </div>[m
+[1mdiff --git a/ShukRouting/ShukRouting.Mvc/Views/Stall/Details.cshtml b/ShukRouting/ShukRouting.Mvc/Views/Stall/Details.cshtml[m
+[1mindex 1fe8f44..8cb3b32 100644[m
+[1m--- a/ShukRouting/ShukRouting.Mvc/Views/Stall/Details.cshtml[m
+[1m+++ b/ShukRouting/ShukRouting.Mvc/Views/Stall/Details.cshtml[m
+[36m@@ -1,57 +1,51 @@[m
+ ﻿@model IEnumerable<ShukRouting.Mvc.Models.StallModel>[m
+ [m
+[31m-@*@{[m
+[32m+[m[32m@{[m
+         ViewBag.Title = "Details";[m
+[31m-    }*@[m
+[31m-<div id="partialDetails">[m
+[31m-    <h2>details</h2>[m
+[31m-[m
+[31m-    <div>[m
+[31m-        @*<h4>Stall Model</h4>*@[m
+[31m-        <hr />[m
+[31m-        @foreach (var item in Model)[m
+[31m-        {[m
+[31m-            <dl class="dl-horizontal">[m
+[31m-                <dt>[m
+[31m-                    @Html.DisplayNameFor(model => model.StallID)[m
+[31m-                </dt>[m
+[31m-[m
+[31m-                <dd>[m
+[31m-                    @Html.DisplayFor(model => item.StallID)[m
+[31m-                </dd>[m
+[31m-[m
+[31m-                <dt>[m
+[31m-                    @Html.DisplayNameFor(model => model.StallName)[m
+[31m-                </dt>[m
+[31m-[m
+[31m-                <dd>[m
+[31m-                    @Html.DisplayFor(model => item.StallName)[m
+[31m-                </dd>[m
+[31m-[m
+[31m-                <dt>[m
+[31m-                    @Html.DisplayNameFor(model => model.FirstCoord)[m
+[31m-                </dt>[m
+[31m-[m
+[31m-                <dd>[m
+[31m-                    @Html.DisplayFor(model => item.FirstCoord)[m
+[31m-                </dd>[m
+[31m-[m
+[31m-                <dt>[m
+[31m-                    @Html.DisplayNameFor(model => model.SecondCoord)[m
+[31m-                </dt>[m
+[31m-[m
+[31m-                <dd>[m
+[31m-                    @Html.DisplayFor(model => item.SecondCoord)[m
+[31m-                </dd>[m
+[31m-[m
+[31m-                [m
+[31m-[m
+[31m-            </dl>[m
+[31m-        }[m
+[31m-    </div>[m
+[31m-    <p>[m
+[31m-        @Html.ActionLink("Edit", "Edit", new { /* id = Model.PrimaryKey */ }) |[m
+[31m-        @Html.ActionLink("Back to List", "Index")[m
+[31m-    </p>[m
+[32m+[m[32m    }[m
+[32m+[m[32m<h2>Details</h2>[m
+[32m+[m
+[32m+[m[32m<div>[m
+[32m+[m[32m    <hr />[m
+[32m+[m[32m    @foreach (var item in Model)[m
+[32m+[m[32m    {[m
+[32m+[m[32m        <dl class="dl-horizontal">[m
+[32m+[m[32m            <dt>[m
+[32m+[m[32m                @Html.DisplayNameFor(model => model.StallID)[m
+[32m+[m[32m            </dt>[m
+[32m+[m
+[32m+[m[32m            <dd>[m
+[32m+[m[32m                @Html.DisplayFor(model => item.StallID)[m
+[32m+[m[32m            </dd>[m
+[32m+[m
+[32m+[m[32m            <dt>[m
+[32m+[m[32m                @Html.DisplayNameFor(model => model.StallName)[m
+[32m+[m[32m            </dt>[m
+[32m+[m
+[32m+[m[32m            <dd>[m
+[32m+[m[32m                @Html.DisplayFor(model => item.StallName)[m
+[32m+[m[32m            </dd>[m
+[32m+[m
+[32m+[m[32m            <dt>[m
+[32m+[m[32m                @Html.DisplayNameFor(model => model.FirstCoord)[m
+[32m+[m[32m            </dt>[m
+[32m+[m
+[32m+[m[32m            <dd>[m
+[32m+[m[32m                @Html.DisplayFor(model => item.FirstCoord)[m
+[32m+[m[32m            </dd>[m
+[32m+[m
+[32m+[m[32m            <dt>[m
+[32m+[m[32m                @Html.DisplayNameFor(model => model.SecondCoord)[m
+[32m+[m[32m            </dt>[m
+[32m+[m
+[32m+[m[32m            <dd>[m
+[32m+[m[32m                @Html.DisplayFor(model => item.SecondCoord)[m
+[32m+[m[32m            </dd>[m
+[32m+[m[32m        </dl>[m
+[32m+[m[32m    }[m
+ </div>[m
+[31m-@*<p>HHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHH</p>*@[m
+\ No newline at end of file[m
+[32m+[m[32m<p>[m
+[32m+[m[32m    @Html.ActionLink("Edit", "Edit", new { /* id = Model.PrimaryKey */ }) |[m
+[32m+[m[32m    @Html.ActionLink("Back to List", "Index")[m
+[32m+[m[32m</p>[m
+[41m+[m
+[1mdiff --git a/ShukRouting/ShukRouting.Mvc/Web.config b/ShukRouting/ShukRouting.Mvc/Web.config[m
+[1mindex 3e2d186..baa3bba 100644[m
+[1m--- a/ShukRouting/ShukRouting.Mvc/Web.config[m
+[1m+++ b/ShukRouting/ShukRouting.Mvc/Web.config[m
+[36m@@ -16,7 +16,8 @@[m
+   </appSettings>[m
+   [m
+     <connectionStrings>[m
+[31m-    <add name="ShukRoutingContext" connectionString="Server=mi3-wsq2.a2hosting.com; database = compuski_shuk_routing; Uid=compuski_shuk_routing_user; Pwd = compuskills-2018-mens-programming; " providerName="System.Data.SqlClient" />[m
+[32m+[m[32m    <!--<add name="ShukRoutingContext" connectionString="Server=mi3-wsq2.a2hosting.com; database = compuski_shuk_routing; Uid=compuski_shuk_routing_user; Pwd = compuskills-2018-mens-programming; " providerName="System.Data.SqlClient" />-->[m
+[32m+[m[32m       <add name="ShukRoutingContext" connectionString="Server=.\SQLEXPRESS04;Database=ShukRoutingDB;Integrated Security=true" providerName="System.Data.SqlClient" />[m
+   </connectionStrings>[m
+     [m
+   <system.web>[m

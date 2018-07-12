@@ -14,17 +14,41 @@ namespace ShukRouting.Mvc.Controllers
     public class StallController : Controller
     {
         private ShukRoutingContext ctx = new ShukRoutingContext();
+
         // GET: Stall
         public ActionResult Index()
         {
             return View();
         }
 
+        public IQueryable StallDetails()
+        {
+            var result = ctx.CommoditiesStalls
+                .Select(r => new StallModel
+                {
+
+                    StallID = r.StallID,
+                    StallName = r.Stall.StallName,
+                    FirstCoord = r.Stall.FirstCoord,
+                    SecondCoord = r.Stall.SecondCoord,
+
+                });
+            return result;
+        }
+
+
+
+        public ActionResult Details()
+        {
+            return View(StallDetails());
+        }
+
         // GET: Stall/Details/5
         [HttpGet]
-        public ActionResult Details(string Name)
+        public ActionResult Details(string stallName)
         {
             var result = ctx.Stalls
+                         .Where(s => s.StallName == stallName)
                          .Select(s => new StallModel
                          {
                              StallID = s.StallID,
@@ -36,10 +60,18 @@ namespace ShukRouting.Mvc.Controllers
             return View(result);
         }
 
+
         // GET: Stall/Create
         public ActionResult Create()
         {
             return View();
+        }
+
+        public ActionResult CreateStall()
+        {
+            var repo = new StallsRepository();
+            var stallNamesList = repo.CreateStall();
+            return View(stallNamesList);
         }
 
         [HttpPost]
@@ -53,12 +85,10 @@ namespace ShukRouting.Mvc.Controllers
                 ctx.SaveChanges();
 
 
-                return RedirectToAction("About", "Home");
+                return RedirectToAction("Index", "Home");
             }
             return View(Stall);
         }
-
-
 
         // GET: Stall/Edit/5
         public ActionResult Edit(int id)

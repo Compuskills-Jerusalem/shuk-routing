@@ -148,13 +148,18 @@
     <Compile Include="App_Start\BundleConfig.cs" />
     <Compile Include="App_Start\FilterConfig.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
+    <Compile Include="Controllers\CommodityStallController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\StallController.cs" />
     <Compile Include="Data\StallsRepository.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
+<<<<<<< HEAD
     <Compile Include="Models\StallCreateModel.cs" />
+=======
+    <Compile Include="Models\CommodityStallModel.cs" />
+>>>>>>> 624024c3d869ef02b06fca43619c7dfecc84abc0
     <Compile Include="Models\StallModel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
@@ -237,8 +242,13 @@
     <Content Include="Views\Home\Index.cshtml" />
     <Content Include="Scripts\version.json" />
     <Content Include="Views\Stall\Create.cshtml" />
+<<<<<<< HEAD
     <Content Include="Views\Stall\Index.cshtml" />
     <Content Include="Views\Stall\CreateStall.cshtml" />
+=======
+    <Content Include="Views\CommodityStall\Create.cshtml" />
+    <Content Include="Views\CommodityStall\Details.cshtml" />
+>>>>>>> 624024c3d869ef02b06fca43619c7dfecc84abc0
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
