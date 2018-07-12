@@ -13,7 +13,6 @@ namespace ShukRouting.Mvc.Controllers
 
     public class StallController : Controller
     {
-
         private ShukRoutingContext ctx = new ShukRoutingContext();
 
         // GET: Stall
@@ -21,6 +20,7 @@ namespace ShukRouting.Mvc.Controllers
         {
             return View();
         }
+
         public IQueryable StallDetails()
         {
             var result = ctx.CommoditiesStalls
@@ -45,9 +45,10 @@ namespace ShukRouting.Mvc.Controllers
 
         // GET: Stall/Details/5
         [HttpGet]
-        public ActionResult Details(string Name)
+        public ActionResult Details(string stallName)
         {
             var result = ctx.Stalls
+                         .Where(s => s.StallName == stallName)
                          .Select(s => new StallModel
                          {
                              StallID = s.StallID,
@@ -66,6 +67,13 @@ namespace ShukRouting.Mvc.Controllers
             return View();
         }
 
+        public ActionResult CreateStall()
+        {
+            var repo = new StallsRepository();
+            var stallNamesList = repo.CreateStall();
+            return View(stallNamesList);
+        }
+
         [HttpPost]
         [ValidateAntiForgeryToken]
         public ActionResult Create(Stall Stall)
@@ -77,7 +85,7 @@ namespace ShukRouting.Mvc.Controllers
                 ctx.SaveChanges();
 
 
-                return RedirectToAction("About", "Home");
+                return RedirectToAction("Index", "Home");
             }
             return View(Stall);
         }
