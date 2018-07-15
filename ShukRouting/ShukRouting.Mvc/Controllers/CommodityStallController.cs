@@ -1,6 +1,7 @@
 ﻿using ShukRouting.DataAccess.DataSource;
 using ShukRouting.DataAccess.Models;
 using ShukRouting.Models;
+using ShukRouting.Mvc.Data;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -13,31 +14,13 @@ namespace ShukRouting.Controllers
     {
         private ShukRoutingContext ctx = new ShukRoutingContext();
 
-        // GET: CommodityStall
         public ActionResult Index()
         {
             return View();
         }
 
-
-
-        //Which stall has given food item
-        public IQueryable StallPerItem(string name)
-        {
-            var result = ctx.CommoditiesStalls
-
-              .Where(r => r.Commodity.CommodityName == name)
-              .Select(r => new CommodityStallModel
-              {
-                  StallName = r.Stall.StallName,
-
-              });
-
-            return result;
-        }
-
-        // retuzrns Lowest price for given item
-        
+        // returns Lowest price for given item
+        //This method will be moved to CommoditiesStallRepository
         public IQueryable LowestPrice(string name)
         {
             var result = ctx.CommoditiesStalls
@@ -52,32 +35,27 @@ namespace ShukRouting.Controllers
                                 TimeRegistered = r.TimeRegistered,
                                 Notes = r.Notes,
                             });
-                            
+
             return result;
         }
 
-        
         [HttpGet]
         public ActionResult Details(string name, string filter = "low")
         {
+            var repo = new CommodityStallRepository();
 
             if (filter == "low")
             {
-                return View(LowestPrice(name));
-
+                var results = LowestPrice(name);
+                return View(results);
             }
-            else 
+            else
             {
-                return View(StallPerItem(name));
+                var results = repo.StallPerItemName(name);
+                return View(results);
             }
-
-
-            
         }
 
-
-
-       
         // GET: CommodityStall/Create
         public ActionResult Create()
         {
@@ -85,8 +63,9 @@ namespace ShukRouting.Controllers
         }
 
         // POST: CommodityStall/Create
+        //This method will be moved to CommoditiesStallRepository
         [HttpPost]
-        public ActionResult Create(CommodityStall commodityStall)
+        public ActionResult Create(CommoditiesStalls commodityStall)
         {
             if (ModelState.IsValid)
             {
@@ -99,7 +78,6 @@ namespace ShukRouting.Controllers
             }
 
             return View();
-
         }
 
         // GET: CommodityStall/Edit/5

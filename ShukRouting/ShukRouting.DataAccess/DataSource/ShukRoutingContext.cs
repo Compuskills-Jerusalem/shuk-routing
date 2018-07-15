@@ -8,6 +8,6 @@ namespace ShukRouting.DataAccess.DataSource
 
         public DbSet<Commodity> Commodities { get; set; }
         public DbSet<Stall> Stalls { get; set; }
-        public DbSet<CommodityStall> CommoditiesStalls { get; set; }
+        public DbSet<CommoditiesStalls> CommoditiesStalls { get; set; }
     }
 }

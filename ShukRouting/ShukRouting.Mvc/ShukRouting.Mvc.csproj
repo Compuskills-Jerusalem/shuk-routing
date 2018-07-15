@@ -148,12 +148,15 @@
     <Compile Include="App_Start\BundleConfig.cs" />
     <Compile Include="App_Start\FilterConfig.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
+    <Compile Include="Controllers\CommodityStallController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\StallController.cs" />
+    <Compile Include="Data\CommodityStallRepository.cs" />
     <Compile Include="Data\StallsRepository.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
+    <Compile Include="Models\CommodityStallModel.cs" />
     <Compile Include="Models\StallCreateModel.cs" />
     <Compile Include="Models\StallModel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -239,6 +242,8 @@
     <Content Include="Views\Stall\Create.cshtml" />
     <Content Include="Views\Stall\Index.cshtml" />
     <Content Include="Views\Stall\CreateStall.cshtml" />
+    <Content Include="Views\CommodityStall\Create.cshtml" />
+    <Content Include="Views\CommodityStall\Details.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace ShukRouting.DataAccess.Models
 {
-   public class Stall
+    public class Stall
     {
         public int StallID { get; set; }
 
