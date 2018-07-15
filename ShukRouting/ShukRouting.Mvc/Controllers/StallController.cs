@@ -22,57 +22,20 @@ namespace ShukRouting.Mvc.Controllers
             return View();
         }
 
-        public IQueryable StallDetails()
-        {
-            var result = ctx.CommoditiesStalls
-                .Select(r => new StallModel
-                {
-
-                    StallID = r.StallID,
-                    StallName = r.Stall.StallName,
-                    FirstCoord = r.Stall.FirstCoord,
-                    SecondCoord = r.Stall.SecondCoord,
-
-                });
-            return result;
-        }
-
-
-
-        public ActionResult Details()
-        {
-            return View(StallDetails());
-        }
-
+        // GET: Stall/Details
         // GET: Stall/Details/5
         [HttpGet]
         public ActionResult Details(string stallName)
         {
-            var result = ctx.Stalls
-                         .Where(s => s.StallName == stallName)
-                         .Select(s => new StallModel
-                         {
-                             StallID = s.StallID,
-                             StallName = s.StallName,
-                             FirstCoord = s.FirstCoord,
-                             SecondCoord = s.SecondCoord,
-                         });
-
-            return View(result);
+            var repo = new StallsRepository();
+            var stallNamesList = repo.GetStalls(stallName);
+            return View(stallNamesList);
         }
-
 
         // GET: Stall/Create
         public ActionResult Create()
         {
             return View();
-        }
-
-        public ActionResult CreateStall()
-        {
-            var repo = new StallsRepository();
-            var stallNamesList = repo.CreateStall();
-            return View(stallNamesList);
         }
 
         [HttpPost]

@@ -12,23 +12,30 @@ namespace ShukRouting.Mvc.Data
 {
     public class StallsRepository
     {
-        public List<StallCreateModel> GetStalls()
+        public List<StallModel> GetStalls(string stallName = null)
         {
             using (var context = new ShukRoutingContext())
             {
                 List<Stall> stalls = new List<Stall>();
-                stalls = context.Stalls.AsNoTracking()
-                    .Include(x => x.StallName)
-                    //.Include(x => x.FirstCoord)
-                    //.Include(x => x.SecondCoord)
-                    .ToList();
+
+                if (stallName == null)
+                {
+                    stalls = context.Stalls.AsNoTracking()
+                        .ToList();
+                }
+                else
+                {
+                    stalls = context.Stalls.AsNoTracking()
+                      .Where(s => s.StallName == stallName)
+                     .ToList();
+                }
 
                 if (stalls != null)
                 {
-                    List<StallCreateModel> stallsDisplay = new List<StallCreateModel>();
+                    List<StallModel> stallsDisplay = new List<StallModel>();
                     foreach (var stall in stalls)
                     {
-                        var stallDisplay = new StallCreateModel()
+                        var stallDisplay = new StallModel()
                         {
                             StallID = stall.StallID,
                             StallName = stall.StallName,
@@ -43,7 +50,7 @@ namespace ShukRouting.Mvc.Data
             }
         }
 
-        public StallCreateModel CreateStall() // Create Comdety Stall
+        public StallCreateModel CreateStall() // Create Stall
         {
             var stNameRepo = new StallNamesReppository();
 
@@ -69,7 +76,7 @@ namespace ShukRouting.Mvc.Data
                     .OrderBy(x => x.StallName)
                     .Select(x => new SelectListItem
                     {
-                       // Value = x.StallID.ToString(),
+                        // Value = x.StallID.ToString(),
                         Text = x.StallName
                     }).ToList();
 
