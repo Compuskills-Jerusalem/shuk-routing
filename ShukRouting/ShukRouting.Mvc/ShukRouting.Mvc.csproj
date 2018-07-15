@@ -236,14 +236,13 @@
     <Content Include="Views\Shared\_Layout.cshtml" />
     <Content Include="Views\Home\About.cshtml" />
     <Content Include="Views\Home\Contact.cshtml" />
-    <Content Include="Views\Stall\Details.cshtml" />
     <Content Include="Views\Home\Index.cshtml" />
     <Content Include="Scripts\version.json" />
-    <Content Include="Views\Stall\Create.cshtml" />
     <Content Include="Views\Stall\Index.cshtml" />
     <Content Include="Views\Stall\CreateStall.cshtml" />
     <Content Include="Views\CommodityStall\Create.cshtml" />
     <Content Include="Views\CommodityStall\Details.cshtml" />
+    <Content Include="Views\Stall\Details.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
