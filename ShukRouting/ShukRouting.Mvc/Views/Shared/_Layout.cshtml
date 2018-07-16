@@ -7,48 +7,9 @@
     @Styles.Render("~/Content/css")
     @Scripts.Render("~/bundles/modernizr")
     @Styles.Render("~/Style/MainStyle.css")
-    <script src="https://code.jquery.com/jquery-1.12.4.min.js"
+   <script src="https://code.jquery.com/jquery-1.12.4.min.js"
             integrity="sha256-ZosEbRLbNQzLpnKIkEdrPv7lOy9C27hHQ+Xp8a4MxAQ="
             crossorigin="anonymous">
-    </script>
-    <script>
-        $(document).ready(function () {
-
-            $("body").on("keypress", function (e) {
-                if (e.which == 13) {
-                    alert("POPOPOPOP!!!");
-                    SearchFunction();
-                }
-            });
-
-            $("#search").on("click", function (e) {
-                SearchFunction();
-            });
-
-
-            function SearchFunction(e) {
-                if ($("#itemInput").val() == "") {
-                    alert("Item name cannot be empty !!");
-                }
-                else {
-                    $.ajax({
-                        type: "GET",
-                        url: "/Stall/Details",
-                        contentType: "application/json; charset=utf-8",
-                        data: { stallName: $("#itemInput").val() },
-                        dataType: "html",
-                        success: function (result, status, xhr) {
-                            $("#body").html(result);
-                        },
-                        error: function (xhr, status, error) {
-                            alert("it was nooot a  success !!!");
-                        }
-                    });
-                };
-                return false;
-            };
-
-        });
     </script>
 </head>
 
@@ -90,6 +51,7 @@
             </footer>
         </div>
     </div>
+    @Scripts.Render("~/bundles/js")
 
     @Scripts.Render("~/bundles/modernizr")
     @Scripts.Render("~/bundles/jqueryval")
