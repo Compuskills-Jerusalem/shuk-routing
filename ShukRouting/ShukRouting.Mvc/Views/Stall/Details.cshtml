@@ -1,4 +1,4 @@
-﻿@model ShukRouting.Mvc.Models.StallModel
+﻿@model IEnumerable<ShukRouting.Mvc.Models.StallModel>
 
 @{
     ViewBag.Title = "Details";
@@ -9,40 +9,43 @@
 <div>
     <h4>StallModel</h4>
     <hr />
-    <dl class="dl-horizontal">
-        <dt>
-            @Html.DisplayNameFor(model => model.StallID)
-        </dt>
+    @foreach(var item in Model)
+    {
+        <dl class="dl-horizontal">
+            <dt>
+                @Html.DisplayNameFor(model => model.StallID)
+            </dt>
 
-        <dd>
-            @Html.DisplayFor(model => model.StallID)
-        </dd>
+            <dd>
+                @Html.DisplayFor(model => item.StallID)
+            </dd>
 
-        <dt>
-            @Html.DisplayNameFor(model => model.StallName)
-        </dt>
+            <dt>
+                @Html.DisplayNameFor(model => model.StallName)
+            </dt>
 
-        <dd>
-            @Html.DisplayFor(model => model.StallName)
-        </dd>
+            <dd>
+                @Html.DisplayFor(model => item.StallName)
+            </dd>
 
-        <dt>
-            @Html.DisplayNameFor(model => model.FirstCoord)
-        </dt>
+            <dt>
+                @Html.DisplayNameFor(model => model.FirstCoord)
+            </dt>
 
-        <dd>
-            @Html.DisplayFor(model => model.FirstCoord)
-        </dd>
+            <dd>
+                @Html.DisplayFor(model => item.FirstCoord)
+            </dd>
 
-        <dt>
-            @Html.DisplayNameFor(model => model.SecondCoord)
-        </dt>
+            <dt>
+                @Html.DisplayNameFor(model => model.SecondCoord)
+            </dt>
 
-        <dd>
-            @Html.DisplayFor(model => model.SecondCoord)
-        </dd>
+            <dd>
+                @Html.DisplayFor(model => item.SecondCoord)
+            </dd>
 
-    </dl>
+        </dl>
+    }
 </div>
 <p>
     @Html.ActionLink("Edit", "Edit", new { /* id = Model.PrimaryKey */ }) |
