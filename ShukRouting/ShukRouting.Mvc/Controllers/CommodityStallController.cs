@@ -19,26 +19,6 @@ namespace ShukRouting.Controllers
             return View();
         }
 
-        // returns Lowest price for given item
-        //This method will be moved to CommoditiesStallRepository
-        public IQueryable LowestPrice(string name)
-        {
-            var result = ctx.CommoditiesStalls
-                            .Where(r => r.Commodity.CommodityName == name)
-                            .OrderBy(r => r.Price)
-                            .Select(r => new CommodityStallModel
-                            {
-                                CommodityName = r.Commodity.CommodityName,
-                                StallName = r.Stall.StallName,
-                                Price = r.Price,
-                                Rating = r.Rating ?? 0,
-                                TimeRegistered = r.TimeRegistered,
-                                Notes = r.Notes,
-                            });
-
-            return result;
-        }
-
         [HttpGet]
         public ActionResult Details(string name, string filter = "low")
         {
@@ -46,7 +26,7 @@ namespace ShukRouting.Controllers
 
             if (filter == "low")
             {
-                var results = LowestPrice(name);
+                var results = repo.LowestPriceForItem(name);
                 return View(results);
             }
             else
