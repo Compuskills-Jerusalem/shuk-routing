@@ -13,9 +13,19 @@ namespace ShukRouting.Mvc.Data
     public class StallsRepository
     {
         public List<StallModel> GetStalls(string stallName = null)
-        {
+        {     
             using (var context = new ShukRoutingContext())
             {
+                //context.Stalls.Add(new Stall
+                //{
+                //    StallID = 1,
+                //    StallName = "Bob's",
+                //    FirstCoord = 1,
+                //    SecondCoord = 1
+                //});
+
+                //context.SaveChanges();
+
                 List<Stall> stalls = new List<Stall>();
 
                 if (stallName == null)
@@ -72,7 +82,7 @@ namespace ShukRouting.Mvc.Data
         {
             using (var context = new ShukRoutingContext())
             {
-                List<SelectListItem> stallNames = context.Stalls//.AsNoTracking()
+                List<SelectListItem> stallNames = context.Stalls.AsNoTracking()
                     .OrderBy(x => x.StallName)
                     .Select(x => new SelectListItem
                     {

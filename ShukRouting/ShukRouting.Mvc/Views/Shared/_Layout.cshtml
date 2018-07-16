@@ -11,9 +11,47 @@
             integrity="sha256-ZosEbRLbNQzLpnKIkEdrPv7lOy9C27hHQ+Xp8a4MxAQ="
             crossorigin="anonymous">
     </script>
+    @*<script>
+            $(document).ready(function () {
+                $("#search").on("click", function (e) {
+                    if ($("#itemInput").val() == "") {
+                        alert("Item name cannot be empty !!");
+                    }
+                    else {
+                        $.ajax({
+                            type: "GET",
+                            url: "/Stall/Details",
+                            contentType: "application/json; charset=utf-8",
+                           data: { stallName: $("#itemInput").val() },
+                            dataType: "html",
+                            success: function (result, status, xhr) {
+                                $("#body").html(result);
+                             },
+                            error: function (xhr, status, error) {
+                                alert("it was nooot a  success !!!");
+                            }
+                        });
+                    }
+                    return false;
+                });
+            });
+        </script>*@
     <script>
         $(document).ready(function () {
+
+            $("body").on("keypress", function (e) {
+                if (e.which == 13) {
+                    alert("POPOPOPOP!!!");
+                    SearchFunction();
+                }
+            });
+
             $("#search").on("click", function (e) {
+                SearchFunction();
+            });
+
+
+            function SearchFunction(e) {
                 if ($("#itemInput").val() == "") {
                     alert("Item name cannot be empty !!");
                 }
@@ -22,18 +60,19 @@
                         type: "GET",
                         url: "/Stall/Details",
                         contentType: "application/json; charset=utf-8",
-                       data: { stallName: $("#itemInput").val() },
+                        data: { stallName: $("#itemInput").val() },
                         dataType: "html",
                         success: function (result, status, xhr) {
                             $("#body").html(result);
-                         },
+                        },
                         error: function (xhr, status, error) {
                             alert("it was nooot a  success !!!");
                         }
                     });
-                }
+                };
                 return false;
-            });
+            };
+
         });
     </script>
 </head>
@@ -62,14 +101,14 @@
                         <input id="itemInput" type="text" class="form-control" placeholder="Search by item name.">
                     </div>
                     <button id="search" type="submit" class="btn btn-default">Search</button>
-                 </form>
+                </form>
             </div>
         </div>
     </div>
     <div class="container body-content" id="container">
         <div id="body">
-              @RenderBody()
-         </div>
+            @RenderBody()
+        </div>
         <div id="footer">
             <footer>
                 <p> We are here to help you get the best out of your shopping !!!</p>

@@ -1,50 +1,51 @@
 ﻿@model IEnumerable<ShukRouting.Mvc.Models.StallModel>
 
 @{
-    ViewBag.Title = "Details";
+    ViewBag.Title = "Stalls Details";
 }
 
-<h2>Details</h2>
+<h2>Stalls Details</h2>
 
-<div>
-    <h4>StallModel</h4>
+<div class="row">
     <hr />
-    @foreach(var item in Model)
+    @foreach (var item in Model)
     {
-        <dl class="dl-horizontal">
-            <dt>
-                @Html.DisplayNameFor(model => model.StallID)
-            </dt>
+        <div id="details" class="col-md-3">
+            <dl class="dl-horizontal">
+                <dt>
+                    @Html.DisplayNameFor(model => model.StallID)
+                </dt>
 
-            <dd>
-                @Html.DisplayFor(model => item.StallID)
-            </dd>
+                <dd>
+                    @Html.DisplayFor(model => item.StallID)
+                </dd>
 
-            <dt>
-                @Html.DisplayNameFor(model => model.StallName)
-            </dt>
+                <dt>
+                    @Html.DisplayNameFor(model => model.StallName)
+                </dt>
 
-            <dd>
-                @Html.DisplayFor(model => item.StallName)
-            </dd>
+                <dd>
+                    @Html.DisplayFor(model => item.StallName)
+                </dd>
 
-            <dt>
-                @Html.DisplayNameFor(model => model.FirstCoord)
-            </dt>
+                <dt>
+                    @Html.DisplayNameFor(model => model.FirstCoord)
+                </dt>
 
-            <dd>
-                @Html.DisplayFor(model => item.FirstCoord)
-            </dd>
+                <dd>
+                    @Html.DisplayFor(model => item.FirstCoord)
+                </dd>
 
-            <dt>
-                @Html.DisplayNameFor(model => model.SecondCoord)
-            </dt>
+                <dt>
+                    @Html.DisplayNameFor(model => model.SecondCoord)
+                </dt>
 
-            <dd>
-                @Html.DisplayFor(model => item.SecondCoord)
-            </dd>
+                <dd>
+                    @Html.DisplayFor(model => item.SecondCoord)
+                </dd>
 
-        </dl>
+            </dl>
+        </div>
     }
 </div>
 <p>
