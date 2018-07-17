@@ -62,9 +62,9 @@ h2 {
 }
 
 #details {
-    border: 4px dashed red;
+    border: 4px solid antiquewhite;
     padding: 20px;
     border-radius: 20px;
     background-color: blanchedalmond;
-    margin: 10px;
+    margin: 45px;
 }

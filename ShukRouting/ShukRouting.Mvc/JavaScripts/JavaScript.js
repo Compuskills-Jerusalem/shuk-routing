@@ -2,18 +2,20 @@
 
     $("body").on("keypress", function (e) {
         if (e.which == 13) {
-            alert("POPOPOPOP!!!");
             SearchFunction();
+            return false;
         }
     });
 
     $("#search").on("click", function (e) {
         SearchFunction();
+        return false;
     });
 
+    function SearchFunction() {
+        var input = $("#itemInput").val();
 
-    function SearchFunction(e) {
-        if ($("#itemInput").val() == "") {
+        if (input == "") {
             alert("Item name cannot be empty !!");
         }
         else {
@@ -21,7 +23,7 @@
                 type: "GET",
                 url: "/Stall/Details",
                 contentType: "application/json; charset=utf-8",
-                data: { stallName: $("#itemInput").val() },
+                data: { stallName: input },
                 dataType: "html",
                 success: function (result, status, xhr) {
                     $("#body").html(result);

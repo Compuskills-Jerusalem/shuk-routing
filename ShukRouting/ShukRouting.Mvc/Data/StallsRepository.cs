@@ -76,7 +76,7 @@ namespace ShukRouting.Mvc.Data
                     .OrderBy(x => x.StallName)
                     .Select(x => new SelectListItem
                     {
-                        // Value = x.StallID.ToString(),
+                        Value = x.StallID.ToString(),
                         Text = x.StallName
                     }).ToList();
 
