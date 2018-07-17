@@ -2,6 +2,7 @@
 using ShukRouting.DataAccess.Models;
 using ShukRouting.Models;
 using ShukRouting.Mvc.Data;
+using ShukRouting.Mvc.Models;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -39,24 +40,22 @@ namespace ShukRouting.Controllers
         // GET: CommodityStall/Create
         public ActionResult Create()
         {
-            return View();
+            var repo = new CommodityStallRepository();
+            var result = repo.CreateCommStall();
+
+            return View(result);
         }
 
         // POST: CommodityStall/Create
-        //This method will be moved to CommoditiesStallRepository
         [HttpPost]
-        public ActionResult Create(CommoditiesStalls commodityStall)
+        public ActionResult Create([Bind(Include = "CommodityStallID, CommodityID, StallID, Price, Rating, TimeRegistered, Notes")]CommodityStallCreateModel model)
         {
-            if (ModelState.IsValid)
+            var repo = new CommodityStallRepository();
+            bool saved = repo.CommodityStallSave(model);
+            if (saved)
             {
-                ctx.CommoditiesStalls.Add(commodityStall);
-                //ctx.Stalls.Add(Stall);
-                ctx.SaveChanges();
-
-
                 return RedirectToAction("Details");
             }
-
             return View();
         }
 

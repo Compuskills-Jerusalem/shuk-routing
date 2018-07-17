@@ -156,6 +156,7 @@
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
+    <Compile Include="Models\CommodityStallCreateModel.cs" />
     <Compile Include="Models\CommodityStallModel.cs" />
     <Compile Include="Models\StallCreateModel.cs" />
     <Compile Include="Models\StallModel.cs" />
@@ -243,9 +244,9 @@
     <Content Include="Scripts\version.json" />
     <Content Include="Views\Stall\Index.cshtml" />
     <Content Include="Views\Stall\CreateStall.cshtml" />
-    <Content Include="Views\CommodityStall\Create.cshtml" />
     <Content Include="Views\CommodityStall\Details.cshtml" />
     <Content Include="Views\Stall\Details.cshtml" />
+    <Content Include="Views\CommodityStall\Create.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
