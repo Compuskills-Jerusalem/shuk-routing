@@ -10,9 +10,9 @@ using System.Web.Mvc;
 
 namespace ShukRouting.Mvc.Data
 {
-    public class StallsRepository
+    public class StallRepository
     {
-        public List<StallModel> GetStalls(string stallName = null)
+        public List<StallModel> GetStallsDetails(string stallName = null)
         {
             using (var context = new ShukRoutingContext())
             {
@@ -50,29 +50,29 @@ namespace ShukRouting.Mvc.Data
             }
         }
 
-        public StallCreateModel CreateStall() // Create Stall
+        public StallCreateModel CreateStall()
         {
-            var stNameRepo = new StallNamesReppository();
-
             var stall = new StallCreateModel()
             {
-                StallID = 10,//Guid.NewGuid().ToString(),
-                StallNames = stNameRepo.GetStallNames(),
-                FirstCoord = 10,
-                SecondCoord = 10
+                StallNames = GetStallNames()
             };
             return stall;
         }
-    }
 
-
-    public class StallNamesReppository
-    {
         public IEnumerable<SelectListItem> GetStallNames()
         {
             using (var context = new ShukRoutingContext())
             {
-                List<SelectListItem> stallNames = context.Stalls//.AsNoTracking()
+                //context.Stalls.Add(new Stall
+                //{
+                //    StallID = 15,
+                //    StallName = "sams",
+                //    FirstCoord = 2,
+                //    SecondCoord = 2
+                //});
+                //context.SaveChanges();
+
+                List<SelectListItem> stallNames = context.Stalls.AsNoTracking()
                     .OrderBy(x => x.StallName)
                     .Select(x => new SelectListItem
                     {

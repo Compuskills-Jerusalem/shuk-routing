@@ -25,17 +25,18 @@ namespace ShukRouting.Mvc.Controllers
         // GET: Stall/Details
         // GET: Stall/Details/5
         [HttpGet]
-        public ActionResult Details(string stallName)
+        public PartialViewResult Details(string stallName)
         {
-            var repo = new StallsRepository();
-            var stallNamesList = repo.GetStalls(stallName);
-            return View(stallNamesList);
+            var repo = new StallRepository();
+            var stallNamesList = repo.GetStallsDetails(stallName);
+            return PartialView(stallNamesList);
         }
 
         // GET: Stall/Create
+        [HttpGet]
         public ActionResult Create()
         {
-            return View();
+           return View();
         }
 
         [HttpPost]
