@@ -9,19 +9,15 @@ using System.Threading.Tasks;
 
 namespace ShukRouting.DataAccess.Initializers
 {
- public   class DropAndSeedInializers : IDatabaseInitializer<ShukRoutingContext>
+    public class DropAndSeedInializer : IDatabaseInitializer<ShukRoutingContext>
     {
         public void InitializeDatabase(ShukRoutingContext context)
         {
-            if (!context.Database.Exists())
-            {
-                context.Database.Create();
-            }
-
             if (!context.Database.CompatibleWithModel(false))
             {
                 context.Database.Delete();
                 context.Database.Create();
+                Seed(context);
             }
         }
 
