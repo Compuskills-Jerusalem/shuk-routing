@@ -82,7 +82,7 @@ namespace ShukRouting.Mvc.Data
 
             var commStallModel = new CommodityStallCreateModel()
             {
-                Stallsnames = repo.GetStallNames(),
+                StallNames = repo.GetStallNames(),
             };
             return commStallModel;
         }

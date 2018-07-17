@@ -18,9 +18,6 @@ namespace ShukRouting.Mvc
             FilterConfig.RegisterGlobalFilters(GlobalFilters.Filters);
             RouteConfig.RegisterRoutes(RouteTable.Routes);
             BundleConfig.RegisterBundles(BundleTable.Bundles);
-
-        //    Database.SetInitializer(new CreateDatabaseIfNotExists<ShukRoutingContext>());
-        //    Database.SetInitializer(new DropCreateDatabaseAlways<ShukRoutingContext>());
-       }
+        }
     }
 }
