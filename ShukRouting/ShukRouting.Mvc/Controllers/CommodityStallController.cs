@@ -56,7 +56,7 @@ namespace ShukRouting.Controllers
             {
                 return RedirectToAction("Details");
             }
-            return View();
+            return View(model);
         }
 
         // GET: CommodityStall/Edit/5
