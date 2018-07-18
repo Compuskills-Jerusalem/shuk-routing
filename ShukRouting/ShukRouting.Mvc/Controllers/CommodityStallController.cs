@@ -21,19 +21,19 @@ namespace ShukRouting.Controllers
         }
 
         [HttpGet]
-        public ActionResult Details(string name, string filter = "low")
-        {
+        public PartialViewResult Details(string name= "Banana", string filter = "low")
+        {   
             var repo = new CommodityStallRepository();
 
             if (filter == "low")
             {
                 var results = repo.LowestPriceForItem(name);
-                return View(results);
+                return PartialView(results);
             }
             else
             {
                 var results = repo.StallPerItemName(name);
-                return View(results);
+                return PartialView(results);
             }
         }
 

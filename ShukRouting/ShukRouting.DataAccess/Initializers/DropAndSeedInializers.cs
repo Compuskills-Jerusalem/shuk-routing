@@ -31,6 +31,19 @@ namespace ShukRouting.DataAccess.Initializers
                 SecondCoord = 1
             });
 
+            ctx.Commodities.Add(new Commodity
+            {
+                CommodityID = 1,
+                CommodityName = "Banana"
+            });
+
+            ctx.CommoditiesStalls.Add(new CommodityStall
+            {
+                CommodityStallID = 1,
+                StallID = 1,
+                CommodityID = 1
+            });
+
             ctx.SaveChanges();
         }
     }
