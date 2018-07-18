@@ -68,3 +68,9 @@ h2 {
     background-color: blanchedalmond;
     margin: 45px;
 }
+.navbar-inverse .navbar-nav > li > a {
+    color: #8e1c09;
+}
+.navbar-inverse .navbar-brand {
+    color: #8e1c09;
+}
