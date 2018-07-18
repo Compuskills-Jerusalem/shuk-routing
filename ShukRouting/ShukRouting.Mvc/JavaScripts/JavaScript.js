@@ -21,9 +21,9 @@
         else {
             $.ajax({
                 type: "GET",
-                url: "/Stall/Details",
+                url: "/CommodityStall/Details",
                 contentType: "application/json; charset=utf-8",
-                data: { stallName: input },
+                data: { name: input },
                 dataType: "html",
                 success: function (result, status, xhr) {
                     $("#body").html(result);

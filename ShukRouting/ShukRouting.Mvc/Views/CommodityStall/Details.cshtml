@@ -4,81 +4,82 @@
     ViewBag.Title = "Details";
 }
 
-<h2>Details</h2>
+<h2>Commodity Stall Details</h2>
 
 <div>
-    <h4>Commodity Stall Model</h4>
     <hr />
     @foreach (var item in Model)
     {
-        <dl class="dl-horizontal">
-            <dt>
-                @Html.DisplayNameFor(model => model.CommodityID)
-            </dt>
+        <div id="details">
+            <dl class="dl-horizontal">
+                <dt>
+                    @Html.DisplayNameFor(model => model.CommodityID)
+                </dt>
 
-            <dd>
-                @Html.DisplayFor(model => item.CommodityID)
-            </dd>
+                <dd>
+                    @Html.DisplayFor(model => item.CommodityID)
+                </dd>
 
-            <dt>
-                @Html.DisplayNameFor(model => model.CommodityName)
-            </dt>
+                <dt>
+                    @Html.DisplayNameFor(model => model.CommodityName)
+                </dt>
 
-            <dd>
-                @Html.DisplayFor(model => item.CommodityName)
-            </dd>
+                <dd>
+                    @Html.DisplayFor(model => item.CommodityName)
+                </dd>
 
-            <dt>
-                @Html.DisplayNameFor(model => model.StallID)
-            </dt>
+                <dt>
+                    @Html.DisplayNameFor(model => model.StallID)
+                </dt>
 
-            <dd>
-                @Html.DisplayFor(model => item.StallID)
-            </dd>
+                <dd>
+                    @Html.DisplayFor(model => item.StallID)
+                </dd>
 
-            <dt>
-                @Html.DisplayNameFor(model => model.StallName)
-            </dt>
+                <dt>
+                    @Html.DisplayNameFor(model => model.StallName)
+                </dt>
 
-            <dd>
-                @Html.DisplayFor(model => item.StallName)
-            </dd>
+                <dd>
+                    @Html.DisplayFor(model => item.StallName)
+                </dd>
 
-            <dt>
-                @Html.DisplayNameFor(model => model.Price)
-            </dt>
+                <dt>
+                    @Html.DisplayNameFor(model => model.Price)
+                </dt>
 
-            <dd>
-                @Html.DisplayFor(model => item.Price)
-            </dd>
+                <dd>
+                    @Html.DisplayFor(model => item.Price)
+                </dd>
 
-            <dt>
-                @Html.DisplayNameFor(model => model.Rating)
-            </dt>
+                <dt>
+                    @Html.DisplayNameFor(model => model.Rating)
+                </dt>
 
-            <dd>
-                @Html.DisplayFor(model => item.Rating)
-            </dd>
+                <dd>
+                    @Html.DisplayFor(model => item.Rating)
+                </dd>
 
-            <dt>
-                @Html.DisplayNameFor(model => model.TimeRegistered)
-            </dt>
+                <dt>
+                    @Html.DisplayNameFor(model => model.TimeRegistered)
+                </dt>
 
-            <dd>
-                @Html.DisplayFor(model => item.TimeRegistered)
-            </dd>
+                <dd>
+                    @Html.DisplayFor(model => item.TimeRegistered)
+                </dd>
 
-            <dt>
-                @Html.DisplayNameFor(model => model.Notes)
-            </dt>
+                <dt>
+                    @Html.DisplayNameFor(model => model.Notes)
+                </dt>
 
-            <dd>
-                @Html.DisplayFor(model => item.Notes)
-            </dd>
+                <dd>
+                    @Html.DisplayFor(model => item.Notes)
+                </dd>
 
-        </dl>
+            </dl>
+        </div>
     }
-    </div>
+</div>
 <p>
     @Html.ActionLink("Edit", "Edit", new { /* id = Model.PrimaryKey */ }) |
     @Html.ActionLink("Back to List", "Index")
