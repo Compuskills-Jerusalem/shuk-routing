@@ -54,9 +54,14 @@ namespace ShukRouting.Controllers
             bool saved = repo.CommodityStallSave(model);
             if (saved)
             {
-                return RedirectToAction("Details");
+                return RedirectToAction("Details", "CommodityStall", new { id = model.CommodityStallID});
             }
+            
+            var stallrepository = new StallRepository();
+            model.StallNames = stallrepository.GetStallNames();
+
             return View(model);
+            
         }
 
         // GET: CommodityStall/Edit/5
