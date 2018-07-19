@@ -63,15 +63,6 @@ namespace ShukRouting.Mvc.Data
         {
             using (var context = new ShukRoutingContext())
             {
-                //context.Stalls.Add(new Stall
-                //{
-                //    StallID = 15,
-                //    StallName = "sams",
-                //    FirstCoord = 2,
-                //    SecondCoord = 2
-                //});
-                //context.SaveChanges();
-
                 List<SelectListItem> stallNames = context.Stalls.AsNoTracking()
                     .OrderBy(x => x.StallName)
                     .Select(x => new SelectListItem
