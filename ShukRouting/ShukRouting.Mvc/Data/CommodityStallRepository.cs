@@ -96,18 +96,20 @@ namespace ShukRouting.Mvc.Data
                 {
                     var commoditystall = new CommodityStall()
                     {
-                        CommodityStallID = commodityStallCreateModel.CommodityStallID,
                         CommodityID = commodityStallCreateModel.CommodityID,
                         StallID = commodityStallCreateModel.StallID,
                         Price = commodityStallCreateModel.Price,
                         Rating = commodityStallCreateModel.Rating,
-                        TimeRegistered = commodityStallCreateModel.TimeRegistered,
+                        TimeRegistered = DateTime.Now,
                         Notes = commodityStallCreateModel.Notes
 
+
                     };
+                    commoditystall.Commodity = context.Commodities.Find(commodityStallCreateModel.CommodityID);
+
                     context.CommoditiesStalls.Add(commoditystall);
                     context.SaveChanges();
-                   // return true;
+                    // return true;
                 }
             }
             return false;

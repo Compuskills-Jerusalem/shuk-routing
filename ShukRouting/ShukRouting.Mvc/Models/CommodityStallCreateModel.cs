@@ -9,7 +9,6 @@ namespace ShukRouting.Mvc.Models
 {
     public class CommodityStallCreateModel
     {
-        [Display(Name = "Commodity Stall ID")]
         public int CommodityStallID { get; set; }
 
         public int CommodityID { get; set; }
@@ -26,8 +25,8 @@ namespace ShukRouting.Mvc.Models
         public Decimal Price { get; set; }
         public int? Rating { get; set; }
 
-        [Display(Name = "Time Registered")]
-        public DateTime TimeRegistered { get; set; }
+        //[Display(Name = "Time Registered")]
+        //public DateTime TimeRegistered { get; set; }
         public string Notes { get; set; }
     }
 }
