@@ -50,15 +50,6 @@ namespace ShukRouting.Mvc.Data
             }
         }
 
-        public StallCreateModel CreateStall()
-        {
-            var stall = new StallCreateModel()
-            {
-                StallNames = GetStallNames()
-            };
-            return stall;
-        }
-
         public IEnumerable<SelectListItem> GetStallNames()
         {
             using (var context = new ShukRoutingContext())
@@ -81,6 +72,28 @@ namespace ShukRouting.Mvc.Data
                 return new SelectList(stallNames, "Value", "Text");
 
             }
+        }
+
+        public bool SaveNewStall(StallModel stall)
+        {
+            if (stall != null) // maybe  take out 
+            {
+                using (var context = new ShukRoutingContext())
+                {
+                    var Stall = new Stall()
+                    {
+                        StallID = stall.StallID,
+                        StallName = stall.StallName,
+                        FirstCoord = stall.FirstCoord,
+                        SecondCoord = stall.SecondCoord
+                    };
+
+                    context.Stalls.Add(Stall);
+                    context.SaveChanges();
+                }
+                return true;
+            }
+            return false;
         }
     }
 }
