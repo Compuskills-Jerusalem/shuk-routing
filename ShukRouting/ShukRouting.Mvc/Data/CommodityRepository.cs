@@ -5,6 +5,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
+using System.Web.Mvc;
 
 namespace ShukRouting.Mvc.Data
 {
@@ -30,6 +31,29 @@ namespace ShukRouting.Mvc.Data
 
             }
             return CommoditiesDisplay;
+        }
+
+        public IEnumerable<SelectListItem> GetCommodetiesName()
+        {
+            var context = new ShukRoutingContext();
+
+            List<SelectListItem> commodityNmaes = context.Commodities.AsNoTracking()
+                                .OrderBy(x => x.CommodityName)
+                                .Select(x => new SelectListItem
+                                {
+                                    Value = x.CommodityID.ToString(),
+                                    Text = x.CommodityName
+                                }).ToList();
+
+                                var comm = new SelectListItem
+                                {
+                                    Value = null,
+                                    Text = "Select Item ..."
+                                };
+
+            commodityNmaes.Insert(0, comm);
+
+            return commodityNmaes;
         }
     }
 }
