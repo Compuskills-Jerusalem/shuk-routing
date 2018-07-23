@@ -1,6 +1,5 @@
 ﻿using ShukRouting.DataAccess.DataSource;
 using ShukRouting.DataAccess.Models;
-using ShukRouting.Models;
 using ShukRouting.Mvc.Data;
 using ShukRouting.Mvc.Models;
 using System;
@@ -21,8 +20,8 @@ namespace ShukRouting.Controllers
         }
 
         [HttpGet]
-        public PartialViewResult Details(string name= "Banana", string filter = "low")
-        {   
+        public PartialViewResult Details(string name = "Banana", string filter = "low")
+        {
             var repo = new CommodityStallRepository();
 
             if (filter == "low")
@@ -54,14 +53,14 @@ namespace ShukRouting.Controllers
             bool saved = repo.CommodityStallSave(model);
             if (saved)
             {
-                return RedirectToAction("Details", "CommodityStall", new { id = model.CommodityStallID});
+                return RedirectToAction("Details", "CommodityStall", new { id = model.CommodityStallID });
             }
-            
+
             var stallrepository = new StallRepository();
             model.StallNames = stallrepository.GetStallNames();
 
             return View(model);
-            
+
         }
 
         // GET: CommodityStall/Edit/5

@@ -1,6 +1,5 @@
 ﻿using ShukRouting.DataAccess.DataSource;
 using ShukRouting.DataAccess.Models;
-using ShukRouting.Models;
 using ShukRouting.Mvc.Models;
 using System;
 using System.Collections.Generic;

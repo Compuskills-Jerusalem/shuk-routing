@@ -1,7 +1,12 @@
 ﻿@model IEnumerable<ShukRouting.Mvc.Models.CommodityModel>
 
+@{
+    ViewBag.Title = "Commodity Details";
+}
+
+<h4>Commodity Details</h4>
+
 <div>
-    <h4>Commodity</h4>
     <hr />
     @foreach (var item in Model)
     {
@@ -14,12 +19,12 @@
                 <dd>
                     @Html.DisplayFor(model => item.CommodityName)
                 </dd>
-
             </dl>
         </div>
     }
 </div>
 <p>
-    @Html.ActionLink("Edit", "Edit", new { @*id = item.CommodityID*@ }) |
+    @Html.ActionLink("Edit", "Edit", new
+    {@*id = item.CommodityID*@}) |
     @Html.ActionLink("Back to List", "Index")
 </p>

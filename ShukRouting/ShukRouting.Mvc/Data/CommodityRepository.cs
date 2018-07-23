@@ -13,24 +13,30 @@ namespace ShukRouting.Mvc.Data
     {
         public List<CommodityModel> GetCommodities()
         {
-            List<CommodityModel> CommoditiesDisplay = new List<CommodityModel>();
-            using (var ctx = new ShukRoutingContext())
+            using (var context = new ShukRoutingContext())
             {
-                var commodities = ctx.Commodities.AsNoTracking()
+                List<Commodity> Commodities = new List<Commodity>();
+
+                Commodities = context.Commodities.AsNoTracking()
                                 .ToList();
 
-                foreach (var item in commodities)
+                if (Commodities != null)
                 {
-                    var comm = new CommodityModel
-                    {
-                        CommodityID = item.CommodityID,
-                        CommodityName = item.CommodityName
-                    };
-                    CommoditiesDisplay.Add(comm);
-                }
+                    List<CommodityModel> CommoditiesDisplay = new List<CommodityModel>();
 
+                    foreach (var commodity in Commodities)
+                    {
+                        var commoditieDisplay = new CommodityModel()
+                        {
+                            CommodityID = commodity.CommodityID,
+                            CommodityName = commodity.CommodityName
+                        };
+                        CommoditiesDisplay.Add(commoditieDisplay);
+                    }
+                    return CommoditiesDisplay;
+                }
+                return null;
             }
-            return CommoditiesDisplay;
         }
 
         public IEnumerable<SelectListItem> GetCommodetiesName()
@@ -45,11 +51,11 @@ namespace ShukRouting.Mvc.Data
                                     Text = x.CommodityName
                                 }).ToList();
 
-                                var comm = new SelectListItem
-                                {
-                                    Value = null,
-                                    Text = "Select Item ..."
-                                };
+            var comm = new SelectListItem
+            {
+                Value = null,
+                Text = "Select Item ..."
+            };
 
             commodityNmaes.Insert(0, comm);
 
