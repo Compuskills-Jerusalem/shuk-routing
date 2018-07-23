@@ -77,12 +77,12 @@
 
                 @using ShukRouting.Mvc.Models
 
-                @model CommodityStallCreateModel
+                @model CommodityModel
 
                 <div id="searchBar">
                     <form class="navbar-form" role="search">
                         <div class="form-group">
-                            @Html.DropDownListFor(m => m.StallNames, new SelectList(Model.StallNames, "Value", "Text"), htmlAttributes: new
+                            @Html.DropDownListFor(m => m.CommodityNames, new SelectList(Model.CommodityNames, "Value", "Text"), htmlAttributes: new
                             {
                                 @class = "form-control",
                                 @id = "itemInput",

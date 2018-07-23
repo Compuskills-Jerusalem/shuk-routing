@@ -12,13 +12,13 @@ namespace ShukRouting.Mvc.Controllers
     {
         public ActionResult Index()
         {
-            var repo = new StallRepository();
+            var repo = new CommodityRepository();
 
-            var commStallModel = new CommodityStallCreateModel()
+            var commModel = new CommodityModel()
             {
-                StallNames = repo.GetStallNames(),
+                CommodityNames = repo.GetCommodetiesName(),
             };
-            return View(commStallModel);
+            return View(commModel);
         }
 
         public ActionResult About()
