@@ -1,4 +1,6 @@
-﻿using System;
+﻿using ShukRouting.Mvc.Data;
+using ShukRouting.Mvc.Models;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
@@ -10,7 +12,13 @@ namespace ShukRouting.Mvc.Controllers
     {
         public ActionResult Index()
         {
-            return View();
+            var repo = new StallRepository();
+
+            var commStallModel = new CommodityStallCreateModel()
+            {
+                StallNames = repo.GetStallNames(),
+            };
+            return View(commStallModel);
         }
 
         public ActionResult About()

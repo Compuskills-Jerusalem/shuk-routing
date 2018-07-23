@@ -109,7 +109,7 @@ namespace ShukRouting.Mvc.Data
 
                     context.CommoditiesStalls.Add(commoditystall);
                     context.SaveChanges();
-                    // return true;
+                    return true;
                 }
             }
             return false;
