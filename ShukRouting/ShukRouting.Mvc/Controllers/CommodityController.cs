@@ -1,4 +1,6 @@
-﻿using System;
+﻿using ShukRouting.DataAccess.DataSource;
+using ShukRouting.Mvc.Data;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
@@ -15,9 +17,13 @@ namespace ShukRouting.Mvc.Controllers
         }
 
         // GET: Commodity/Details/5
-        public ActionResult Details(int id)
+        [HttpGet]
+        public ActionResult Details()
         {
-            return View();
+            var repo = new CommodityRepository();
+            var result = repo.GetCommodities();
+
+            return View(result);
         }
 
         // GET: Commodity/Create
