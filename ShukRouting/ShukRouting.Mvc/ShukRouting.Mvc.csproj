@@ -152,11 +152,13 @@
     <Compile Include="Controllers\CommodityStallController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\StallController.cs" />
+    <Compile Include="Data\CommodityRepository.cs" />
     <Compile Include="Data\CommodityStallRepository.cs" />
     <Compile Include="Data\StallsRepository.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
+    <Compile Include="Models\CommodityModel.cs" />
     <Compile Include="Models\CommodityStallCreateModel.cs" />
     <Compile Include="Models\CommodityStallModel.cs" />
     <Compile Include="Models\StallCreateModel.cs" />
@@ -247,10 +249,10 @@
     <Content Include="Views\CommodityStall\Details.cshtml" />
     <Content Include="Views\Stall\Details.cshtml" />
     <Content Include="Views\Stall\Create.cshtml" />
+    <Content Include="Views\Commodity\Details.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
-    <Folder Include="Views\Commodity\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="fonts\glyphicons-halflings-regular.woff" />
