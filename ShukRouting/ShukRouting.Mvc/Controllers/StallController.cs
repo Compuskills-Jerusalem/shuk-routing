@@ -25,34 +25,33 @@ namespace ShukRouting.Mvc.Controllers
         // GET: Stall/Details
         // GET: Stall/Details/5
         [HttpGet]
-        public PartialViewResult Details(string stallName)
+        public ActionResult Details(string stallName = null)
         {
             var repo = new StallRepository();
             var stallNamesList = repo.GetStallsDetails(stallName);
-            return PartialView(stallNamesList);
+            return View(stallNamesList);
         }
 
         // GET: Stall/Create
         [HttpGet]
         public ActionResult Create()
         {
-           return View();
+            return View();
         }
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create(Stall Stall)
+        public ActionResult Create(StallModel stall)
         {
             if (ModelState.IsValid)
             {
+                var repo = new StallRepository();
 
-                ctx.Stalls.Add(Stall);
-                ctx.SaveChanges();
-
-
-                return RedirectToAction("Index", "Home");
+                bool result = repo.SaveNewStall(stall);
+                if (result)
+                    return RedirectToAction("Details", "Stall");
             }
-            return View(Stall);
+            return View(stall);
         }
 
         // GET: Stall/Edit/5
