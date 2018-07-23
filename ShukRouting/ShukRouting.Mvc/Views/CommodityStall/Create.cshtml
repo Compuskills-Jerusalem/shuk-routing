@@ -7,13 +7,21 @@
 <h2>Contribute Commodity Stall</h2>
 
 
-@using (Html.BeginForm())
+@using (Html.BeginForm()) 
 {
     @Html.AntiForgeryToken()
-
+    
     <div class="form-horizontal">
-        <hr />
+         <hr />
         @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.CommodityStallID, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.CommodityStallID, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.CommodityStallID, "", new { @class = "text-danger" })
+            </div>
+        </div>
 
         <div class="form-group">
             @Html.LabelFor(model => model.CommodityID, htmlAttributes: new { @class = "control-label col-md-2" })
@@ -32,9 +40,17 @@
         </div>
 
         <div class="form-group">
+            @Html.LabelFor(model => model.StallID, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.StallID, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.StallID, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
             @Html.LabelFor(model => model.StallName, htmlAttributes: new { @class = "control-label col-md-2" })
             <div class="col-md-10">
-                @Html.DropDownListFor(model => model.StallID, new SelectList(Model.StallNames, "Value", "Text"), htmlAttributes: new { @class = "form-control" })
+                @Html.DropDownListFor(model => model.StallID,new SelectList(Model.StallNames,"Value","Text"),  htmlAttributes : new { @class = "form-control" })
                 @Html.ValidationMessageFor(model => model.StallID, "", new { @class = "text-danger" })
             </div>
         </div>
@@ -52,6 +68,14 @@
             <div class="col-md-10">
                 @Html.EditorFor(model => model.Rating, new { htmlAttributes = new { @class = "form-control" } })
                 @Html.ValidationMessageFor(model => model.Rating, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.TimeRegistered, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.TimeRegistered, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.TimeRegistered, "", new { @class = "text-danger" })
             </div>
         </div>
 

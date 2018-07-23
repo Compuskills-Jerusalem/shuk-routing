@@ -23,10 +23,11 @@ namespace ShukRouting.Mvc.Models
         public IEnumerable<SelectListItem> StallNames { get; set; }
 
         public Decimal Price { get; set; }
+
+        [Range(1, 5)]
         public int? Rating { get; set; }
 
-        //[Display(Name = "Time Registered")]
-        //public DateTime TimeRegistered { get; set; }
+        public DateTime TimeRegistered { get; set; }
         public string Notes { get; set; }
     }
 }
