@@ -6,12 +6,19 @@
 
 <h4>Commodity Details</h4>
 
-<div>
+<div class="row">
     <hr />
     @foreach (var item in Model)
     {
-        <div id="details">
+        <div id="details" class="col-md-3">
             <dl class="dl-horizontal">
+                <dt>
+                    @Html.DisplayNameFor(model => model.CommodityID)
+                </dt>
+
+                <dd>
+                    @Html.DisplayFor(model => item.CommodityID)
+                </dd>
                 <dt>
                     @Html.DisplayNameFor(model => model.CommodityName)
                 </dt>
@@ -24,7 +31,6 @@
     }
 </div>
 <p>
-    @Html.ActionLink("Edit", "Edit", new
-    {@*id = item.CommodityID*@}) |
+    @Html.ActionLink("Edit", "Edit", new {@*id = item.CommodityID*@}) |
     @Html.ActionLink("Back to List", "Index")
 </p>

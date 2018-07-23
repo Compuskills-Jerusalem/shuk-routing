@@ -35,9 +35,9 @@
                 else {
                     $.ajax({
                         type: "GET",
-                        url: "/CommodityStall/Details",
+                        url: "/Commodity/Details",
                         contentType: "application/json; charset=utf-8",
-                        data: { name: input },
+                        data: { commodityName: input },
                         dataType: "html",
                         success: function (result, status, xhr) {
                             $("#body").html(result);

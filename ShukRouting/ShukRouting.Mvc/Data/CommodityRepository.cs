@@ -11,14 +11,15 @@ namespace ShukRouting.Mvc.Data
 {
     public class CommodityRepository
     {
-        public List<CommodityModel> GetCommodities()
+        public List<CommodityModel> GetCommodities(string commodityName = null)
         {
             using (var context = new ShukRoutingContext())
             {
                 List<Commodity> Commodities = new List<Commodity>();
 
                 Commodities = context.Commodities.AsNoTracking()
-                                .ToList();
+                    .Where(x => x.CommodityName == commodityName)
+                    .ToList();
 
                 if (Commodities != null)
                 {
