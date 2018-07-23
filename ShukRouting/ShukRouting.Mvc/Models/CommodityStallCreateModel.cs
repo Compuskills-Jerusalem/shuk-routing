@@ -25,6 +25,7 @@ namespace ShukRouting.Mvc.Models
         public Decimal Price { get; set; }
 
         [Range(1, 5)]
+        [Display(Name = "Rate The Item")]
         public int? Rating { get; set; }
 
         public DateTime TimeRegistered { get; set; }
