@@ -93,29 +93,30 @@
                         <button id="search" type="submit" class="btn btn-default">Search</button>
                     </form>
                 </div>
-
             </div>
         </div>
-        <div class="container body-content" id="container">
-            <div id="body">
-                @RenderBody()
-            </div>
-            <div id="footer">
-                <footer>
-                    <p> We are here to help you get the best out of your shopping !!!</p>
-                </footer>
-            </div>
+    </div>
+
+    <div class="container body-content" id="container">
+        <div id="body">
+            @RenderBody()
         </div>
+        <div id="footer">
+            <footer>
+                <p> We are here to help you get the best out of your shopping !!!</p>
+            </footer>
+        </div>
+    </div>
 
-        @Scripts.Render("~/bundles/modernizr")
-        @Scripts.Render("~/bundles/jqueryval")
+    @Scripts.Render("~/bundles/modernizr")
+    @Scripts.Render("~/bundles/jqueryval")
 
-        @Scripts.Render("~/bundles/jquery")
-        @Scripts.Render("~/bundles/bootstrap")
-        @Scripts.Render("~/bundles/angular")
+    @Scripts.Render("~/bundles/jquery")
+    @Scripts.Render("~/bundles/bootstrap")
+    @Scripts.Render("~/bundles/angular")
 
-        @Scripts.Render("~/bundles/unobtrusiveajax")
-        @RenderSection("scripts", required: false)
+    @Scripts.Render("~/bundles/unobtrusiveajax")
+    @RenderSection("scripts", required: false)
 
 </body>
 </html>
