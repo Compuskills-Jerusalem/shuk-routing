@@ -154,7 +154,7 @@
     <Compile Include="Controllers\StallController.cs" />
     <Compile Include="Data\CommodityRepository.cs" />
     <Compile Include="Data\CommodityStallRepository.cs" />
-    <Compile Include="Data\StallsRepository.cs" />
+    <Compile Include="Data\StallRepository.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>

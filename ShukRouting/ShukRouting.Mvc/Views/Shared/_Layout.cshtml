@@ -37,7 +37,7 @@
                         type: "GET",
                         url: "/Commodity/Details",
                         contentType: "application/json; charset=utf-8",
-                        data: { commodityName: input },
+                        data: { commodityID: input },
                         dataType: "html",
                         success: function (result, status, xhr) {
                             $("#body").html(result);
@@ -82,7 +82,7 @@
                 <div id="searchBar">
                     <form class="navbar-form" role="search">
                         <div class="form-group">
-                            @Html.DropDownListFor(m => m.CommodityNames, new SelectList(Model.CommodityNames, "Value", "Text"), htmlAttributes: new
+                            @Html.DropDownListFor(Model => Model.CommodityName, new SelectList(Model.CommodityNames, "Value", "Text"), htmlAttributes: new
                             {
                                 @class = "form-control",
                                 @id = "itemInput",
