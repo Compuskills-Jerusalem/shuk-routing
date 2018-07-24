@@ -18,12 +18,12 @@ namespace ShukRouting.Mvc.Controllers
 
         // GET: Commodity/Details/5
         [HttpGet]
-        public ActionResult Details(string commodityName = "Apple")
+        public PartialViewResult Details(string commodityName)
         {
             var repo = new CommodityRepository();
             var result = repo.GetCommodities(commodityName);
 
-            return View(result);
+            return PartialView(result);
         }
 
         // GET: Commodity/Create

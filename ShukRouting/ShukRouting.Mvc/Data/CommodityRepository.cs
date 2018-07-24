@@ -11,7 +11,7 @@ namespace ShukRouting.Mvc.Data
 {
     public class CommodityRepository
     {
-        public List<CommodityModel> GetCommodities(string commodityName = null)
+        public List<CommodityModel> GetCommodities(string commodityName)
         {
             using (var context = new ShukRoutingContext())
             {
