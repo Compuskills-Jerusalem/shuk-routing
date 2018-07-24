@@ -11,14 +11,14 @@ namespace ShukRouting.Mvc.Data
 {
     public class CommodityStallRepository
     {
-        public List<CommodityStallModel> StallPerItemName(string commodityName)
+        public List<CommodityStallModel> StallPerCommodityID(int commodityID)
         {
             using (var context = new ShukRoutingContext())
             {
                 List<CommodityStall> Stalls = new List<CommodityStall>();
 
                 Stalls = context.CommoditiesStalls.AsNoTracking()
-                    .Where(s => s.Commodity.CommodityName == commodityName)
+                    .Where(s => s.CommodityID == commodityID)
                     .ToList();
 
                 if (Stalls != null)
@@ -41,14 +41,14 @@ namespace ShukRouting.Mvc.Data
             }
         }
 
-        public List<CommodityStallModel> LowestPriceForItem(string itemName)
+        public List<CommodityStallModel> LowestPriceForItem(int commodityID)
         {
             using (var context = new ShukRoutingContext())
             {
                 List<CommodityStall> Stalls = new List<CommodityStall>();
 
                 Stalls = context.CommoditiesStalls.AsNoTracking()
-                    .Where(s => s.Commodity.CommodityName == itemName)
+                    .Where(s => s.CommodityID == commodityID)
                     .OrderBy(s => s.Price)
                     .ToList();
 
