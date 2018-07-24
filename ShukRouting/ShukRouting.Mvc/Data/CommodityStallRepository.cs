@@ -11,7 +11,7 @@ namespace ShukRouting.Mvc.Data
 {
     public class CommodityStallRepository
     {
-        public List<CommodityStallModel> StallPerCommodityID(int commodityID)
+        public List<CommodityStallModel> StallPerCommodityID(int? commodityID)
         {
             using (var context = new ShukRoutingContext())
             {
@@ -41,7 +41,7 @@ namespace ShukRouting.Mvc.Data
             }
         }
 
-        public List<CommodityStallModel> LowestPriceForItem(int commodityID)
+        public List<CommodityStallModel> LowestPriceForItem(int? commodityID)
         {
             using (var context = new ShukRoutingContext())
             {

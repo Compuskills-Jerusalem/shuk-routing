@@ -20,7 +20,7 @@ namespace ShukRouting.Controllers
         }
 
         [HttpGet]
-        public PartialViewResult Details(int commodityID = 1, string filter = "low")
+        public PartialViewResult Details(int? commodityID, string filter = "low")
         {
             var repo = new CommodityStallRepository();
 
