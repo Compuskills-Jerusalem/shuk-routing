@@ -20,19 +20,19 @@ namespace ShukRouting.Controllers
         }
 
         [HttpGet]
-        public PartialViewResult Details(int? commodityID, string filter = "low")
+        public ActionResult Details(int? commodityID, string filter = "low")
         {
             var repo = new CommodityStallRepository();
 
             if (filter == "low")
             {
                 var results = repo.LowestPriceForItem(commodityID);
-                return PartialView(results);
+                return View(results);
             }
             else
             {
                 var results = repo.StallPerCommodityID(commodityID);
-                return PartialView(results);
+                return View(results);
             }
         }
 
@@ -54,7 +54,7 @@ namespace ShukRouting.Controllers
             bool saved = repo.CommodityStallSave(model);
             if (saved)
             {
-                return RedirectToAction("Details", "CommodityStall", new { id = model.CommodityStallID });
+                return RedirectToAction("Index", "Home");
             }
 
             var stallrepository = new StallRepository();
