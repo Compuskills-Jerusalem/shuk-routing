@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace ShukRouting.DataAccess.Models
 {
-    
+
     [Table("CommoditiesStalls")]
     public class CommodityStall
     {
