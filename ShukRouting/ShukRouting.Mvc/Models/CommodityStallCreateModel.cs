@@ -11,7 +11,7 @@ namespace ShukRouting.Mvc.Models
     {
         public int CommodityStallID { get; set; }
 
-        public int CommodityID { get; set; }
+        public int? CommodityID { get; set; }
 
         [Display(Name = "Commodity Name")]
         public string CommodityName { get; set; }
