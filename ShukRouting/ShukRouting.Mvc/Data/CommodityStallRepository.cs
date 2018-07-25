@@ -91,29 +91,37 @@ namespace ShukRouting.Mvc.Data
 
         public bool CommodityStallSave(CommodityStallCreateModel commodityStallCreateModel)
         {
-            if (commodityStallCreateModel != null)
+            if (commodityStallCreateModel.CommodityID != null)
             {
-                using (var context = new ShukRoutingContext())
+                if (commodityStallCreateModel != null)
                 {
-                    var commoditystall = new CommodityStall()
+                    using (var context = new ShukRoutingContext())
                     {
-                        CommodityID = commodityStallCreateModel.CommodityID,
-                        StallID = commodityStallCreateModel.StallID,
-                        Price = commodityStallCreateModel.Price,
-                        Rating = commodityStallCreateModel.Rating,
-                        TimeRegistered = DateTime.Now,
-                        Notes = commodityStallCreateModel.Notes
+                        var commoditystall = new CommodityStall()
+                        {
+                            CommodityID = commodityStallCreateModel.CommodityID,
+                            StallID = commodityStallCreateModel.StallID,
+                            Price = commodityStallCreateModel.Price,
+                            Rating = commodityStallCreateModel.Rating,
+                            TimeRegistered = DateTime.Now,
+                            Notes = commodityStallCreateModel.Notes
 
 
-                    };
-                    commoditystall.Commodity = context.Commodities.Find(commodityStallCreateModel.CommodityID);
+                        };
+                        commoditystall.Commodity = context.Commodities.Find(commodityStallCreateModel.CommodityID);
 
-                    context.CommoditiesStalls.Add(commoditystall);
-                    context.SaveChanges();
-                    return true;
+                        context.CommoditiesStalls.Add(commoditystall);
+                        context.SaveChanges();
+                        return true;
+                    }
                 }
+                return false;
             }
-            return false;
+            else
+            {
+
+                return false;
+            }
         }
     }
 }
