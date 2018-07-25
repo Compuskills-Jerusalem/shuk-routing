@@ -18,10 +18,10 @@ namespace ShukRouting.Mvc.Controllers
 
         // GET: Commodity/Details/5
         [HttpGet]
-        public PartialViewResult Details(int commodityID)
+        public PartialViewResult Details(int? ID)
         {
             var repo = new CommodityRepository();
-            var result = repo.GetCommodities(commodityID);
+            var result = repo.GetCommodities(ID);
 
             return PartialView(result);
         }
