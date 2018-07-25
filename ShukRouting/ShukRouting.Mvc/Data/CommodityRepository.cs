@@ -42,25 +42,25 @@ namespace ShukRouting.Mvc.Data
 
         public IEnumerable<SelectListItem> GetCommodetiesName()
         {
-            var context = new ShukRoutingContext();
-
-            List<SelectListItem> commodityNmaes = context.Commodities.AsNoTracking()
-                                .OrderBy(x => x.CommodityName)
-                                .Select(x => new SelectListItem
-                                {
-                                    Value = x.CommodityID.ToString(),
-                                    Text = x.CommodityName
-                                }).ToList();
-
-            var comm = new SelectListItem
+            using (var context = new ShukRoutingContext())
             {
-                Value = null,
-                Text = "Select Item ..."
-            };
+                List<SelectListItem> commodityNmaes = context.Commodities.AsNoTracking()
+                                    .OrderBy(x => x.CommodityName)
+                                    .Select(x => new SelectListItem
+                                    {
+                                        Value = x.CommodityID.ToString(),
+                                        Text = x.CommodityName
+                                    }).ToList();
 
-            commodityNmaes.Insert(0, comm);
+                var commodityTip = new SelectListItem
+                {
+                    Value = null,
+                    Text = "--- select Item ---"
+                };
 
-            return commodityNmaes;
+                commodityNmaes.Insert(0, commodityTip);
+                return new SelectList(commodityNmaes, "Value", "Text");
+            }
         }
     }
 }

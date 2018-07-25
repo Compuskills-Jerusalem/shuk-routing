@@ -37,10 +37,11 @@ namespace ShukRouting.Controllers
         }
 
         // GET: CommodityStall/Create
+        [HttpGet]
         public ActionResult Create()
         {
             var repo = new CommodityStallRepository();
-            var result = repo.CreateCommStall();
+            CommodityStallCreateModel result = repo.CreateCommStall();
 
             return View(result);
         }

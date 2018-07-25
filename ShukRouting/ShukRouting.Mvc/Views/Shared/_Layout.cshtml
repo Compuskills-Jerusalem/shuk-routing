@@ -42,7 +42,7 @@
                         success: function (result, status, xhr) {
                             $("#body").html(result);
                         },
-                        error: function (xhr, status, error) { 
+                        error: function (xhr, status, error) {
                             alert("it was nooot a  success !!!");
                         }
                     });
@@ -82,7 +82,7 @@
                 <div id="searchBar">
                     <form class="navbar-form" role="search">
                         <div class="form-group">
-                            @Html.DropDownListFor(Model => Model.CommodityName, new SelectList(Model.CommodityNames, "Value", "Text"), htmlAttributes: new
+                            @Html.DropDownListFor(model => model.CommodityID, new SelectList(Model.CommodityNames, "Value", "Text"), htmlAttributes: new
                             {
                                 @class = "form-control",
                                 @id = "itemInput",

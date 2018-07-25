@@ -15,6 +15,7 @@ namespace ShukRouting.Mvc.Models
 
         [Display(Name = "Commodity Name")]
         public string CommodityName { get; set; }
+        public IEnumerable<SelectListItem> CommodityNames { get; set; }
 
         public int StallID { get; set; }
 
