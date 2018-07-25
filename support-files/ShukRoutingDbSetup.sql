@@ -10,11 +10,13 @@ StallID INT NOT NULL PRIMARY KEY IDENTITY(1, 1),
 StallName NVARCHAR(50) NOT NULL, FirstCoord INT, SecondCoord INT
 );
 
+DROP TABLE CommoditiesStalls
+
 CREATE TABLE dbo.CommoditiesStalls
 (
-CommoditiesStallsID INT NOT NULL PRIMARY KEY IDENTITY(1, 1), 
-CommoditiesID INT NOT NULL FOREIGN KEY REFERENCES Commodities(CommodityID), 
-StallsID INT NOT NULL FOREIGN KEY REFERENCES Stalls(StallID), 
+CommodityStallID INT NOT NULL PRIMARY KEY IDENTITY(1, 1), 
+CommodityID INT FOREIGN KEY REFERENCES Commodities(CommodityID), 
+StallID INT FOREIGN KEY REFERENCES Stalls(StallID), 
 Price SMALLMONEY NOT NULL CHECK(Price > 0), 
 Rating INT CHECK(Rating >= 1 AND Rating <= 5), 
 TimeRegistered DateTime NOT NULL DEFAULT(SYSDATETIME()), 
@@ -35,9 +37,9 @@ Values
 ('Roland''s Rolls', 50, 19), 
 ('Shabbos Treats', 12, 31);
 
-INSERT INTO CommoditiesStalls 
-(CommoditiesID, StallsID, Price) 
+INSERT INTO  CommoditiesStalls
+(CommodityID, StallID, Price) 
 VALUES 
-(1, 3, 21.34), 
+(2, 3, 21.34), 
 (3, 2, 12.12), 
-(2, 1, 5.67);
+(4, 4, 5.67);
