@@ -20,47 +20,47 @@ namespace ShukRouting.Controllers
         }
 
         [HttpGet]
-        public PartialViewResult Details(int? commodityID = 3, string filter = "low")
+        public ActionResult Details(int? commodityID = 3, string filter = "low")
         {
             var repo = new CommodityStallRepository();
 
             if (filter == "low")
             {
                 var results = repo.LowestPriceForItem(commodityID);
-                return PartialView(results);
+                return View(results);
             }
             else
             {
                 var results = repo.StallPerCommodityID(commodityID);
-                return PartialView(results);
+                return View(results);
             }
         }
 
         // GET: CommodityStall/Create
         [HttpGet]
-        public PartialViewResult Create()
+        public ActionResult Create()
         {
             var repo = new CommodityStallRepository();
             CommodityStallCreateModel result = repo.CreateCommStall();
 
-            return PartialView(result);
+            return View(result);
         }
 
         // POST: CommodityStall/Create
         [HttpPost]
-        public PartialViewResult Create([Bind(Include = "CommodityStallID, CommodityID, StallID, Price, Rating, TimeRegistered, Notes")]CommodityStallCreateModel model)
+        public ActionResult Create([Bind(Include = "CommodityStallID, CommodityID, StallID, Price, Rating, TimeRegistered, Notes")]CommodityStallCreateModel model)
         {
             var repo = new CommodityStallRepository();
             bool saved = repo.CommodityStallSave(model);
             if (saved)
             {
-               // return RedirectToRouteResult("Index", "Home");
+                return RedirectToAction("Index", "Home");
             }
 
             var stallrepository = new StallRepository();
             model.StallNames = stallrepository.GetStallNames();
 
-            return PartialView(model);
+            return View(model);
 
         }
 
