@@ -1,6 +1,5 @@
 ﻿using ShukRouting.DataAccess.DataSource;
 using ShukRouting.DataAccess.Models;
-using ShukRouting.Models;
 using ShukRouting.Mvc.Models;
 using System;
 using System.Collections.Generic;
@@ -12,18 +11,20 @@ namespace ShukRouting.Mvc.Data
 {
     public class CommodityStallRepository
     {
-        public List<CommodityStallModel> StallPerItemName(string commodityName)
+        public List<CommodityStallModel> StallPerCommodityID(int? commodityID)
         {
             using (var context = new ShukRoutingContext())
             {
-                List<CommoditiesStalls> Stalls = new List<CommoditiesStalls>();
+                List<CommodityStall> Stalls = new List<CommodityStall>();
+
                 Stalls = context.CommoditiesStalls.AsNoTracking()
-                    .Where(s => s.Commodity.CommodityName == commodityName)
+                    .Where(s => s.CommodityID == commodityID)
                     .ToList();
 
                 if (Stalls != null)
                 {
                     List<CommodityStallModel> stallsDisplay = new List<CommodityStallModel>();
+
                     foreach (var stall in Stalls)
                     {
                         var stallDisplay = new CommodityStallModel()
@@ -37,6 +38,89 @@ namespace ShukRouting.Mvc.Data
                     return stallsDisplay;
                 }
                 return null;
+            }
+        }
+
+        public List<CommodityStallModel> LowestPriceForItem(int? commodityID)
+        {
+            using (var context = new ShukRoutingContext())
+            {
+                List<CommodityStall> Stalls = new List<CommodityStall>();
+
+                Stalls = context.CommoditiesStalls.AsNoTracking()
+                    .Where(s => s.CommodityID == commodityID)
+                    .OrderBy(s => s.Price)
+                    .ToList();
+
+                if (Stalls != null)
+                {
+                    List<CommodityStallModel> StallsDisplay = new List<CommodityStallModel>();
+
+                    foreach (var stall in Stalls)
+                    {
+                        var Stalldisplay = new CommodityStallModel()
+                        {
+                            CommodityName = stall.Commodity.CommodityName,
+                            StallName = stall.Stall.StallName,
+                            Price = stall.Price,
+                            Rating = stall.Rating,
+                            TimeRegistered = stall.TimeRegistered,
+                            Notes = stall.Notes
+                        };
+                        StallsDisplay.Add(Stalldisplay);
+                    }
+                    return StallsDisplay;
+                }
+                return null;
+            }
+        }
+
+        public CommodityStallCreateModel CreateCommStall()
+        {
+            var stallRepo = new StallRepository();
+            var commodityRepo = new CommodityRepository();
+
+            var commStallModel = new CommodityStallCreateModel()
+            {
+                CommodityNames = commodityRepo.GetCommodetiesName(),
+                StallNames = stallRepo.GetStallNames(),
+            };
+
+            return commStallModel;
+        }
+
+        public bool CommodityStallSave(CommodityStallCreateModel commodityStallCreateModel)
+        {
+            if (commodityStallCreateModel.CommodityID != null)
+            {
+                if (commodityStallCreateModel != null)
+                {
+                    using (var context = new ShukRoutingContext())
+                    {
+                        var commoditystall = new CommodityStall()
+                        {
+                            CommodityID = commodityStallCreateModel.CommodityID,
+                            StallID = commodityStallCreateModel.StallID,
+                            Price = commodityStallCreateModel.Price,
+                            Rating = commodityStallCreateModel.Rating,
+                            TimeRegistered = DateTime.Now,
+                            Notes = commodityStallCreateModel.Notes
+
+
+                        };
+                        commoditystall.Commodity = context.Commodities.Find(commodityStallCreateModel.CommodityID);
+
+                        context.CommoditiesStalls.Add(commoditystall);
+                        context.SaveChanges();
+                        return true;
+                    }
+                }
+                return false;
+            }
+            else
+            {
+
+                return false;
             }
         }
     }

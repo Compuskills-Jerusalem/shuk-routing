@@ -1,7 +1,7 @@
 ﻿using ShukRouting.DataAccess.DataSource;
 using ShukRouting.DataAccess.Models;
-using ShukRouting.Models;
 using ShukRouting.Mvc.Data;
+using ShukRouting.Mvc.Models;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -19,65 +19,49 @@ namespace ShukRouting.Controllers
             return View();
         }
 
-        // returns Lowest price for given item
-        //This method will be moved to CommoditiesStallRepository
-        public IQueryable LowestPrice(string name)
-        {
-            var result = ctx.CommoditiesStalls
-                            .Where(r => r.Commodity.CommodityName == name)
-                            .OrderBy(r => r.Price)
-                            .Select(r => new CommodityStallModel
-                            {
-                                CommodityName = r.Commodity.CommodityName,
-                                StallName = r.Stall.StallName,
-                                Price = r.Price,
-                                Rating = r.Rating ?? 0,
-                                TimeRegistered = r.TimeRegistered,
-                                Notes = r.Notes,
-                            });
-
-            return result;
-        }
-
         [HttpGet]
-        public ActionResult Details(string name, string filter = "low")
+        public ActionResult Details(int? commodityID = 3, string filter = "low")
         {
             var repo = new CommodityStallRepository();
 
             if (filter == "low")
             {
-                var results = LowestPrice(name);
+                var results = repo.LowestPriceForItem(commodityID);
                 return View(results);
             }
             else
             {
-                var results = repo.StallPerItemName(name);
+                var results = repo.StallPerCommodityID(commodityID);
                 return View(results);
             }
         }
 
         // GET: CommodityStall/Create
+        [HttpGet]
         public ActionResult Create()
         {
-            return View();
+            var repo = new CommodityStallRepository();
+            CommodityStallCreateModel result = repo.CreateCommStall();
+
+            return View(result);
         }
 
         // POST: CommodityStall/Create
-        //This method will be moved to CommoditiesStallRepository
         [HttpPost]
-        public ActionResult Create(CommoditiesStalls commodityStall)
+        public ActionResult Create([Bind(Include = "CommodityStallID, CommodityID, StallID, Price, Rating, TimeRegistered, Notes")]CommodityStallCreateModel model)
         {
-            if (ModelState.IsValid)
+            var repo = new CommodityStallRepository();
+            bool saved = repo.CommodityStallSave(model);
+            if (saved)
             {
-                ctx.CommoditiesStalls.Add(commodityStall);
-                //ctx.Stalls.Add(Stall);
-                ctx.SaveChanges();
-
-
-                return RedirectToAction("Details");
+                return RedirectToAction("Index", "Home");
             }
 
-            return View();
+            var stallrepository = new StallRepository();
+            model.StallNames = stallrepository.GetStallNames();
+
+            return View(model);
+
         }
 
         // GET: CommodityStall/Edit/5

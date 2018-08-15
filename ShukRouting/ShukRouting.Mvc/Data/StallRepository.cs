@@ -10,25 +10,32 @@ using System.Web.Mvc;
 
 namespace ShukRouting.Mvc.Data
 {
-    public class StallsRepository
+    public class StallRepository
     {
-        public List<StallCreateModel> GetStalls()
+        public List<StallModel> GetStallsDetails(string stallName = null)
         {
             using (var context = new ShukRoutingContext())
             {
                 List<Stall> stalls = new List<Stall>();
-                stalls = context.Stalls.AsNoTracking()
-                    .Include(x => x.StallName)
-                    //.Include(x => x.FirstCoord)
-                    //.Include(x => x.SecondCoord)
-                    .ToList();
+
+                if (stallName == null)
+                {
+                    stalls = context.Stalls.AsNoTracking()
+                        .ToList();
+                }
+                else
+                {
+                    stalls = context.Stalls.AsNoTracking()
+                      .Where(s => s.StallName == stallName)
+                     .ToList();
+                }
 
                 if (stalls != null)
                 {
-                    List<StallCreateModel> stallsDisplay = new List<StallCreateModel>();
+                    List<StallModel> stallsDisplay = new List<StallModel>();
                     foreach (var stall in stalls)
                     {
-                        var stallDisplay = new StallCreateModel()
+                        var stallDisplay = new StallModel()
                         {
                             StallID = stall.StallID,
                             StallName = stall.StallName,
@@ -43,33 +50,15 @@ namespace ShukRouting.Mvc.Data
             }
         }
 
-        public StallCreateModel CreateStall() // Create Comdety Stall
-        {
-            var stNameRepo = new StallNamesReppository();
-
-            var stall = new StallCreateModel()
-            {
-                StallID = 10,//Guid.NewGuid().ToString(),
-                StallNames = stNameRepo.GetStallNames(),
-                FirstCoord = 10,
-                SecondCoord = 10
-            };
-            return stall;
-        }
-    }
-
-
-    public class StallNamesReppository
-    {
         public IEnumerable<SelectListItem> GetStallNames()
         {
             using (var context = new ShukRoutingContext())
             {
-                List<SelectListItem> stallNames = context.Stalls//.AsNoTracking()
+                List<SelectListItem> stallNames = context.Stalls.AsNoTracking()
                     .OrderBy(x => x.StallName)
                     .Select(x => new SelectListItem
                     {
-                       // Value = x.StallID.ToString(),
+                        Value = x.StallID.ToString(),
                         Text = x.StallName
                     }).ToList();
 
@@ -83,6 +72,28 @@ namespace ShukRouting.Mvc.Data
                 return new SelectList(stallNames, "Value", "Text");
 
             }
+        }
+
+        public bool SaveNewStall(StallModel stall)
+        {
+            if (stall != null) // maybe  take out 
+            {
+                using (var context = new ShukRoutingContext())
+                {
+                    var Stall = new Stall()
+                    {
+                        StallID = stall.StallID,
+                        StallName = stall.StallName,
+                        FirstCoord = stall.FirstCoord,
+                        SecondCoord = stall.SecondCoord
+                    };
+
+                    context.Stalls.Add(Stall);
+                    context.SaveChanges();
+                }
+                return true;
+            }
+            return false;
         }
     }
 }

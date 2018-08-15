@@ -7,7 +7,7 @@ using System.Web;
 using System.Web.Mvc;
 using System.Web.Optimization;
 using System.Web.Routing;
-
+using ShukRouting.DataAccess.Initializers;
 namespace ShukRouting.Mvc
 {
     public class MvcApplication : System.Web.HttpApplication
@@ -19,8 +19,11 @@ namespace ShukRouting.Mvc
             RouteConfig.RegisterRoutes(RouteTable.Routes);
             BundleConfig.RegisterBundles(BundleTable.Bundles);
 
-        //    Database.SetInitializer(new CreateDatabaseIfNotExists<ShukRoutingContext>());
-        //    Database.SetInitializer(new DropCreateDatabaseAlways<ShukRoutingContext>());
-       }
+//#if debug
+//            Database.SetInitializer(new CreateDatabaseIfNotExists<ShukRoutingContext>());
+//#else
+//            Database.SetInitializer(new DropAndSeedInializer());
+//#endif
+        }
     }
 }

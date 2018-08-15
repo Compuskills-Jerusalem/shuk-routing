@@ -9,12 +9,13 @@ using System.Threading.Tasks;
 namespace ShukRouting.DataAccess.Models
 {
 
-    public class CommoditiesStalls
+    [Table("CommoditiesStalls")]
+    public class CommodityStall
     {
         [Key]
         public int CommodityStallID { get; set; }
 
-        public int CommodityID { get; set; }
+        public int? CommodityID { get; set; }
         public virtual Commodity Commodity { get; set; }
 
         public int StallID { get; set; }

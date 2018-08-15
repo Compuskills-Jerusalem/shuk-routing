@@ -9,19 +9,15 @@ using System.Threading.Tasks;
 
 namespace ShukRouting.DataAccess.Initializers
 {
- public   class DropAndSeedInializers : IDatabaseInitializer<ShukRoutingContext>
+    public class DropAndSeedInializer : IDatabaseInitializer<ShukRoutingContext>
     {
         public void InitializeDatabase(ShukRoutingContext context)
         {
-            if (!context.Database.Exists())
-            {
-                context.Database.Create();
-            }
-
             if (!context.Database.CompatibleWithModel(false))
             {
                 context.Database.Delete();
                 context.Database.Create();
+                Seed(context);
             }
         }
 
@@ -33,6 +29,19 @@ namespace ShukRouting.DataAccess.Initializers
                 StallName = "Bob's",
                 FirstCoord = 1,
                 SecondCoord = 1
+            });
+
+            ctx.Commodities.Add(new Commodity
+            {
+                CommodityID = 1,
+                CommodityName = "Banana"
+            });
+
+            ctx.CommoditiesStalls.Add(new CommodityStall
+            {
+                CommodityStallID = 1,
+                StallID = 1,
+                CommodityID = 1
             });
 
             ctx.SaveChanges();
