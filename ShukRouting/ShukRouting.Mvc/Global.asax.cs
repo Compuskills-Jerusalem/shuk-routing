@@ -19,11 +19,11 @@ namespace ShukRouting.Mvc
             RouteConfig.RegisterRoutes(RouteTable.Routes);
             BundleConfig.RegisterBundles(BundleTable.Bundles);
 
-//#if debug
-//            Database.SetInitializer(new CreateDatabaseIfNotExists<ShukRoutingContext>());
-//#else
-//            Database.SetInitializer(new DropAndSeedInializer());
-//#endif
+#if debug
+            Database.SetInitializer(new CreateDatabaseIfNotExists<ShukRoutingContext>());
+#else
+            Database.SetInitializer(new DropAndSeedInializer());
+#endif
         }
     }
 }
