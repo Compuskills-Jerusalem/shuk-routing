@@ -14,19 +14,16 @@ namespace ShukRouting.Mvc.Controllers
         public ActionResult Index()
         {
             var repo = new CommodityRepository();
-            
-            var commModel = new CommodityModel()
-            {
-                CommodityNames = repo.GetCommodetiesName(),
-            };
-            
+
+            var commModel = repo.GetCommodityNameList();
+
             return View(commModel);
         }
 
         public ActionResult About()
         {
             ViewBag.Message = "Your application description page.";
-            
+
             return View();
         }
 
@@ -49,8 +46,8 @@ namespace ShukRouting.Mvc.Controllers
         {
             (filterContext.Result as ViewResult).ViewBag.Commodities = repo.GetCommodetiesName();
             //from commodity in CommodityModel select (IEnumerable<CommodityModel>);
-                                                                           //DBNull.commodites
-                                                                           //where ....
+            //DBNull.commodites
+            //where ....
         }
 
 
