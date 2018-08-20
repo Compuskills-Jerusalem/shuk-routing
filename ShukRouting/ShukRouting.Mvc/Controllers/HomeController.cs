@@ -33,10 +33,6 @@ namespace ShukRouting.Mvc.Controllers
 
             return View();
         }
-
-        //protected override void OnActionExecuted(ActionExecutedContext filterContext)
-        //{
-        //}
     }
 
     public class AddCommoditiesToViewBagFilterAttribute : ActionFilterAttribute
@@ -44,12 +40,7 @@ namespace ShukRouting.Mvc.Controllers
         CommodityRepository repo = new CommodityRepository();
         public override void OnActionExecuted(ActionExecutedContext filterContext)
         {
-            (filterContext.Result as ViewResult).ViewBag.Commodities = repo.GetCommodetiesName();
-            //from commodity in CommodityModel select (IEnumerable<CommodityModel>);
-            //DBNull.commodites
-            //where ....
+            (filterContext.Result as ViewResult).ViewBag.Commodities = repo.GetCommodityNameList();
         }
-
-
     }
 }
