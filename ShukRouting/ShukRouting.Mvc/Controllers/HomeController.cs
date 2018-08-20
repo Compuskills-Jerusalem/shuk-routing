@@ -14,10 +14,8 @@ namespace ShukRouting.Mvc.Controllers
         {
             var repo = new CommodityRepository();
 
-            var commModel = new CommodityModel()
-            {
-                CommodityNames = repo.GetCommodetiesName(),
-            };
+            var commModel = repo.GetCommodityNameList();
+
             return View(commModel);
         }
 
