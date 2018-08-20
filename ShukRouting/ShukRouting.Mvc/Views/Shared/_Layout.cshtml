@@ -75,8 +75,10 @@
                     <li>@Html.ActionLink("Add Commodity Stall", "Create", "CommodityStall")</li>
                     <li>@Html.ActionLink("Commodity Stall", "Details", "CommodityStall")</li>
                 </ul>
+                @using ShukRouting.Mvc.Models
+                @Html.Partial("_dropDown", (IEnumerable<CommodityModel>)@ViewBag.Commodities)
 
-                  @using ShukRouting.Mvc.Models
+                @*@using ShukRouting.Mvc.Models
 
         @model CommodityModel
 
@@ -93,7 +95,7 @@
                 </div>
                 <button id="search" type="submit" class="btn btn-default">Search</button>
             </form>
-        </div>
+        </div>*@
             </div>
         </div>
     </div>

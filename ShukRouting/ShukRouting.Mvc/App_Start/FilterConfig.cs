@@ -1,4 +1,5 @@
-﻿using System.Web;
+﻿using ShukRouting.Mvc.Controllers;
+using System.Web;
 using System.Web.Mvc;
 
 namespace ShukRouting.Mvc
@@ -8,6 +9,7 @@ namespace ShukRouting.Mvc
         public static void RegisterGlobalFilters(GlobalFilterCollection filters)
         {
             filters.Add(new HandleErrorAttribute());
+            filters.Add(new AddCommoditiesToViewBagFilterAttribute());
         }
     }
 }
