@@ -8,16 +8,19 @@
     <hr />
     <div class="row">
         <div class="col-md-6">
-            <input type="text" id="myInput" value="" @*onkeyup="myFunction()"*@ placeholder="Search by product name.." title="Type in a name">
+           
+                <span class="glyphicon glyphicon-search"></span>
+                <input type="text" id="myInput" @*value=""*@ @*onkeyup="myFunction()"*@ placeholder="Search by product name.." title="Type in a name">
+            
 
             @foreach (var item in Model)
-            {
-                <ul class="myUL">
-                    <li class="myLI">
-                        <p> @Html.DisplayFor(modle => item.CommodityName, item.CommodityID)<p />
-                    </li>
-                </ul>
-            }
+    {
+        <ul class="myUL">
+            <li class="myLI">
+                <p> @Html.DisplayFor(modle => item.CommodityName, item.CommodityID)<p />
+            </li>
+        </ul>
+}
         </div>
     </div>
 </div>

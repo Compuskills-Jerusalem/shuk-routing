@@ -1,5 +1,6 @@
 ﻿using ShukRouting.DataAccess.DataSource;
 using ShukRouting.Mvc.Data;
+using ShukRouting.Mvc.Models;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -27,6 +28,7 @@ namespace ShukRouting.Mvc.Controllers
         }
 
         // GET: Commodity/Create
+        [HttpGet]
         public ActionResult Create()
         {
             return View();
@@ -34,18 +36,18 @@ namespace ShukRouting.Mvc.Controllers
 
         // POST: Commodity/Create
         [HttpPost]
-        public ActionResult Create(FormCollection collection)
+        public ActionResult Create(CommodityModel commodity)
         {
-            try
+            if (ModelState.IsValid)
             {
-                // TODO: Add insert logic here
+                var repo = new CommodityRepository();
 
-                return RedirectToAction("Index");
+                var saved = repo.saveNewCommodity(commodity);
+                if (saved)
+
+                 return   RedirectToAction("index", "Home");
             }
-            catch
-            {
-                return View();
-            }
+            return View(commodity);
         }
 
         // GET: Commodity/Edit/5

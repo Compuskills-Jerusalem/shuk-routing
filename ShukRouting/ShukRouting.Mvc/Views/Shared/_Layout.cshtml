@@ -68,12 +68,12 @@
 
             <div class="navbar-collapse collapse">
                 <ul class="nav navbar-nav">
-                    <li>@Html.ActionLink("Home", "Index", "Home")</li>
                     <li>@Html.ActionLink("About", "About", "Home")</li>
                     <li>@Html.ActionLink("Contact", "Contact", "Home")</li>
                     <li>@Html.ActionLink("Add Stall", "Create", "Stall")</li>
                     <li>@Html.ActionLink("Add Commodity Stall", "Create", "CommodityStall")</li>
                     <li>@Html.ActionLink("Commodity Stall", "Details", "CommodityStall")</li>
+                    <li>@Html.ActionLink("Add Commodity", "Create", "Commodity")</li>
                 </ul>
                 @using ShukRouting.Mvc.Models
                 @Html.Partial("_dropDown", (IEnumerable<CommodityModel>)@ViewBag.Commodities)

@@ -251,6 +251,7 @@
     <Content Include="Views\Commodity\Details.cshtml" />
     <Content Include="Views\CommodityStall\Create.cshtml" />
     <Content Include="Views\Shared\_dropDown.cshtml" />
+    <Content Include="Views\Commodity\Create.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

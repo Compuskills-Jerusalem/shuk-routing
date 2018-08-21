@@ -70,5 +70,24 @@ namespace ShukRouting.Mvc.Data
                 return new SelectList(commodityNmaes, "Value", "Text");
             }
         }
+
+        public bool saveNewCommodity(CommodityModel commodity)
+        {
+            if (commodity != null)
+            {
+                using (var context = new ShukRoutingContext())
+                {
+                    Commodity Commodity = new Commodity()
+                    {
+                        CommodityID = commodity.CommodityID,
+                        CommodityName = commodity.CommodityName
+                    };
+                    context.Commodities.Add(Commodity);
+                    context.SaveChanges();
+                }
+                return true;
+            }
+            return false;
+        }
     }
 }
