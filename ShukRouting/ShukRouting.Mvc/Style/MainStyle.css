@@ -81,8 +81,10 @@ h2 {
 #searchBar {
     margin-left: 363px;
 }
+
 .glyphicon-search:before {
     position: absolute;
-    margin-top: 23px;
-    margin-left: 517px;
+    content: "\e003";
+    margin-left: 515px;
+    margin-top: -59px;
 }
