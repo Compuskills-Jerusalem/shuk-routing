@@ -11,15 +11,23 @@ namespace ShukRouting.Mvc.Data
 {
     public class CommodityRepository
     {
-        public List<CommodityModel> GetCommodities(int? commodityID)
+        public List<CommodityModel> GetCommodities(int? commodityID = null)
         {
             using (var context = new ShukRoutingContext())
             {
                 List<Commodity> Commodities = new List<Commodity>();
 
-                Commodities = context.Commodities.AsNoTracking()
-                    .Where(x => x.CommodityID == commodityID)
+                if (commodityID != null)
+                {
+                    Commodities = context.Commodities.AsNoTracking()
+                   .Where(x => x.CommodityID == commodityID)
+                   .ToList();
+                }
+                else
+                {
+                    Commodities = context.Commodities.AsNoTracking()
                     .ToList();
+                }
 
                 if (Commodities != null)
                 {
@@ -40,30 +48,7 @@ namespace ShukRouting.Mvc.Data
             }
         }
 
-        public List<CommodityModel> GetCommodityNameList()
-        {
-            using(var context = new ShukRoutingContext())
-            {
-                List<Commodity> Commodities = new List<Commodity>();
-
-                Commodities = context.Commodities.AsNoTracking().ToList();
-
-                List<CommodityModel> CommoditieDisplay = new List<CommodityModel>();
-
-                foreach (var commodity in Commodities)
-                {
-                    var commoditieDisplay = new CommodityModel()
-                    {
-                        CommodityID = commodity.CommodityID,
-                        CommodityName = commodity.CommodityName
-                    };
-                    CommoditieDisplay.Add(commoditieDisplay);
-                }
-                return CommoditieDisplay;
-            }
-        }
-
-        public IEnumerable<SelectListItem> GetCommodetiesName()
+        public IEnumerable<SelectListItem> GetCommoditiesNames()
         {
             using (var context = new ShukRoutingContext())
             {

@@ -15,7 +15,7 @@ namespace ShukRouting.Mvc.Controllers
         {
             var repo = new CommodityRepository();
 
-            var commModel = repo.GetCommodityNameList();
+            var commModel = repo.GetCommodities();
 
             return View(commModel);
         }
@@ -40,7 +40,16 @@ namespace ShukRouting.Mvc.Controllers
         CommodityRepository repo = new CommodityRepository();
         public override void OnActionExecuted(ActionExecutedContext filterContext)
         {
-            (filterContext.Result as ViewResult).ViewBag.Commodities = repo.GetCommodityNameList();
+            if (filterContext == null)
+            {
+                throw new ArgumentNullException("actionContext");
+            }
+            else
+            {
+                (filterContext.Result as ViewResult).ViewBag.Commodities = repo.GetCommodities();
+            }
+
+            base.OnActionExecuted(filterContext);
         }
     }
 }
