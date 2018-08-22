@@ -84,7 +84,8 @@ h2 {
 
 .glyphicon-search:before {
     position: absolute;
+    padding: 7px;
     content: "\e003";
     margin-left: 515px;
-    margin-top: -59px;
+    margin-top: -67px;
 }

@@ -8,66 +8,61 @@
     <hr />
     <div class="row">
         <div class="col-md-6">
-            <div >
-                <input type="text" id="myInput" onkeyup="myFunction()" placeholder="Search by product name.." title="Type in a name">
-            </div> 
+            <input type="text" class="latgeInput" id="itemInput" onkeyup="filtrFunction()" placeholder="Search by product name.." title="Type in a name">
             <span class="glyphicon glyphicon-search"></span>
-            
 
             @foreach (var item in Model)
-    {
-        <ul class="myUL">
-            <li class="myLI">
-                <p> @Html.DisplayFor(modle => item.CommodityName, item.CommodityID)<p />
-            </li>
-        </ul>
-}
+            {
+                <ul class="myUL">
+                    <li class="myLI">
+                        @Html.DisplayFor(modle => item.CommodityName, "Value", "Text")
+                    </li>
+                </ul>
+            }
         </div>
     </div>
 </div>
-
 <script>
-    $(document).ready(function () {
+           // $(document).ready(function () {
 
-        //$("body".on("keypress", function (e) {
-        //    if (e.which == 13) {
+                //$(".glyphicon").on("click", function () {
+                //    SearchFunction();
+                //})
 
-        //    }
-        //}));
+                //$(".myLI").on("click", function (event) {
+                //    selectedItem(event);
+                //    return false;
+                //})
+            //});
 
-        $(".myLI").on("click", function (event) {
-            selectedItem(event);
-        })
-    });
-
-    function selectedItem(event) {
-        var item = $(event.target).closest("p").text();
-
-         $("input").val(item);
-    };
+            //function selectedItem(event) {
+            //    var item = $(event.target).closest("p").text();
+            //    $("input").val(item);
+            //};
 
 
-    function myFunction() {
-        // Declare variables
-        var input = document.getElementById("myInput");
-        var filter = input.value.toUpperCase();
-        var ul = document.getElementsByClassName("myUL");
-        var li = document.getElementsByTagName("li");
+            //function filtrFunction() {
+            //    // Declare variables
+            //    var input = document.getElementById("#itemInput");
+            //    var filter = input.value.toUpperCase();
+            //    var ul = document.getElementsByClassName("myUL");
+            //    var li = document.getElementsByTagName("li");
 
-        // Loop through all list items, and hide those who don't match the search query
-        for (i = 0; i < ul.length; i++) {
-            p = ul[i].getElementsByTagName("p")[0];
-            if (p.innerHTML.toUpperCase().indexOf(filter) > -1) {
-                ul[i].style.display = "";
-            } else {
-                ul[i].style.display = "none";
-            }
-        }
-    }
+            //    // Loop through all list items, and hide those who don't match the search query
+            //    for (i = 0; i < ul.length; i++) {
+            //        l = ul[i].getElementsByTagName("li")[0];
+
+            //        if (l.innerHTML.toUpperCase().indexOf(filter, 0) > -1) {
+            //            ul[i].style.display = "";
+            //        } else {
+            //            ul[i].style.display = "none";
+            //        }
+            //    }
+            //}
 </script>
 
 <style>
-    #myInput {
+    .latgeInput { 
         /*  background-image: url('/css/searchicon.png'); Add a search icon to input */
         background-position: 10px 12px; /* Position the search icon */
         background-repeat: no-repeat; /* Do not repeat the icon image */
