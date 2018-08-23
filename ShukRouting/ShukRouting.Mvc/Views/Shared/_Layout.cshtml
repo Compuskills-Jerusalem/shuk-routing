@@ -14,43 +14,77 @@
     <script>
         $(document).ready(function () {
 
-            $("body").on("keypress", function (e) {
+            $("body").on("keypress", function (e) {  // _dropDowen/_Layout
                 if (e.which == 13) {
                     SearchFunction();
                     return false;
                 }
             });
-            
-            $("#search").on("click", function (e) {
+
+            $("#search").on("click", function (e) { // _dropDowen/_Layout
                 SearchFunction();
                 return false;
             });
 
-            function SearchFunction() {
-                var input = $("#itemInput").val();
+            $(".glyphicon").on("click", function () { // index/Home
+                SearchFunction();
+            })
 
-                if (input == "") {
-                    alert("Item name cannot be empty !!");
-                }
-                else {
-                    $.ajax({
-                        type: "GET",
-                        url: "/CommodityStall/Details",
-                        contentType: "application/json; charset=utf-8",
-                        data: { commodityID: input },
-                        dataType: "html",
-                        success: function (result, status, xhr) {
-                            $("#body").html(result);
-                        },
-                        error: function (xhr, status, error) {
-                            alert("it was nooot a  success !!!");
-                        }
-                    });
-                };
+            $(".myLI").on("click", function (event) { // index/Home
+                clickedItem(event);
                 return false;
-            };
-
+            })
         });
+
+        function SearchFunction() {
+            var input = $("#itemInput").val();
+
+            if (input == "") {
+                alert("Item name cannot be empty !!");
+            }
+            else {
+                $.ajax({
+                    type: "GET",
+                    url: "/CommodityStall/Details",
+                    contentType: "application/json; charset=utf-8",
+                    data: { commodityID: input },
+                    dataType: "html",
+                    success: function (result, status, xhr) {
+                        $("#body").html(result);
+                    },
+                    error: function (xhr, status, error) {
+                        alert("it was nooot a  success !!!");
+                    }
+                });
+            };
+            return false;
+        };
+
+        function clickedItem(event) {    // index/Home
+            var itemSelected = $(event.target).text();
+            alert(itemSelected);
+            $(".latgeInput").val(itemSelected);
+        };
+
+        function filtrFunction() {   // index/Home
+            // Declare variables
+            var input = document.getElementById("itemInput");
+            var filter = input.value.toUpperCase();
+            var ul = document.getElementsByClassName("myUL");
+            var li = document.getElementsByTagName("li");
+
+            // Loop through all list items, and hide those who don't match the search query
+            for (i = 0; i < ul.length; i++) {
+                l = ul[i].getElementsByTagName("li")[0];
+
+                if (l.innerHTML.toUpperCase().indexOf(filter, 0) > -1) {
+                    ul[i].style.display = "";
+                } else {
+                    ul[i].style.display = "none";
+                }
+            }
+        }
+
     </script>
 </head>
 
@@ -70,17 +104,20 @@
                 <ul class="nav navbar-nav">
                     <li>@Html.ActionLink("About", "About", "Home")</li>
                     <li>@Html.ActionLink("Contact", "Contact", "Home")</li>
+                     
+                    @*Comented as for the mvp issue #33
+
                     <li>@Html.ActionLink("Add Stall", "Create", "Stall")</li>
                     <li>@Html.ActionLink("Add Commodity Stall", "Create", "CommodityStall")</li>
                     <li>@Html.ActionLink("Commodity Stall", "Details", "CommodityStall")</li>
-                    <li>@Html.ActionLink("Add Commodity", "Create", "Commodity")</li>
+                    <li>@Html.ActionLink("Add Commodity", "Create", "Commodity")</li>*@
                 </ul>
                 @using ShukRouting.Mvc.Models
                 @Html.Partial("_dropDown", (IEnumerable<CommodityModel>)@ViewBag.Commodities)
 
             </div>
         </div>
-    </div>
+    </div> 
 
     <div class="container body-content" id="container">
         <div id="body">

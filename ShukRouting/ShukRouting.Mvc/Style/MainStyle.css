@@ -72,10 +72,12 @@ h2 {
 
 .navbar-inverse .navbar-nav > li > a {
     color: #8e1c09;
+    font-size:20px;
 }
 
 .navbar-inverse .navbar-brand {
     color: #8e1c09;
+    font-size: 28px;
 }
 
 #searchBar {
@@ -84,7 +86,8 @@ h2 {
 
 .glyphicon-search:before {
     position: absolute;
+    padding: 7px;
     content: "\e003";
     margin-left: 515px;
-    margin-top: -59px;
+    margin-top: -67px;
 }
