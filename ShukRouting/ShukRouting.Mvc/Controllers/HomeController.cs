@@ -38,6 +38,7 @@ namespace ShukRouting.Mvc.Controllers
     public class AddCommoditiesToViewBagFilterAttribute : ActionFilterAttribute
     {
         CommodityRepository repo = new CommodityRepository();
+
         public override void OnActionExecuted(ActionExecutedContext filterContext)
         {
             if (filterContext == null)
@@ -46,7 +47,7 @@ namespace ShukRouting.Mvc.Controllers
             }
             else
             {
-                (filterContext.Result as ViewResult).ViewBag.Commodities = repo.GetCommodities();
+                (filterContext.Result as ViewResult).ViewBag.Commodities = repo.GetCommoditiesNamesForLayout();
             }
 
             base.OnActionExecuted(filterContext);

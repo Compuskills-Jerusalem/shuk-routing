@@ -109,6 +109,7 @@ namespace ShukRouting.Mvc.Data
 
                         };
                         commoditystall.Commodity = context.Commodities.Find(commodityStallCreateModel.CommodityID);
+                        commoditystall.Stall = context.Stalls.Find(commodityStallCreateModel.StallID);
 
                         context.CommoditiesStalls.Add(commoditystall);
                         context.SaveChanges();

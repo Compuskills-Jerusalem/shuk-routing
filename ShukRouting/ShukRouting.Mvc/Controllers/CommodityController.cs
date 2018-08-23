@@ -42,7 +42,7 @@ namespace ShukRouting.Mvc.Controllers
             {
                 var repo = new CommodityRepository();
 
-                var saved = repo.saveNewCommodity(commodity);
+                var saved = repo.SaveNewCommodity(commodity);
                 if (saved)
 
                  return   RedirectToAction("index", "Home");

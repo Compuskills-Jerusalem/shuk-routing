@@ -52,7 +52,7 @@ namespace ShukRouting.Mvc.Data
         {
             using (var context = new ShukRoutingContext())
             {
-                List<SelectListItem> commodityNmaes = context.Commodities.AsNoTracking()
+                List<SelectListItem> commodityNames = context.Commodities.AsNoTracking()
                                     .OrderBy(x => x.CommodityName)
                                     .Select(x => new SelectListItem
                                     {
@@ -66,12 +66,29 @@ namespace ShukRouting.Mvc.Data
                     Text = "--- select Item ---"
                 };
 
-                commodityNmaes.Insert(0, commodityTip);
-                return new SelectList(commodityNmaes, "Value", "Text");
+                commodityNames.Insert(0, commodityTip);
+                return new SelectList(commodityNames, "Value", "Text");
             }
         }
 
-        public bool saveNewCommodity(CommodityModel commodity)
+        public IEnumerable<CommodityModel> GetCommoditiesNamesForLayout()
+        {
+            using (var context = new ShukRoutingContext())
+            {
+                var commodityNames = context.Commodities.AsNoTracking()
+                                    .OrderBy(x => x.CommodityName)
+                                    .Select(x => new CommodityModel()
+                                    {
+                                        CommodityID = x.CommodityID,
+                                        CommodityName = x.CommodityName
+
+                                    }).ToList();
+
+                return commodityNames;
+            }
+        }
+
+        public bool SaveNewCommodity(CommodityModel commodity)
         {
             if (commodity != null)
             {
