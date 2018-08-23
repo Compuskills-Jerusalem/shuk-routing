@@ -104,17 +104,20 @@
                 <ul class="nav navbar-nav">
                     <li>@Html.ActionLink("About", "About", "Home")</li>
                     <li>@Html.ActionLink("Contact", "Contact", "Home")</li>
+                     
+                    @*Comented as for the mvp issue #33
+
                     <li>@Html.ActionLink("Add Stall", "Create", "Stall")</li>
                     <li>@Html.ActionLink("Add Commodity Stall", "Create", "CommodityStall")</li>
                     <li>@Html.ActionLink("Commodity Stall", "Details", "CommodityStall")</li>
-                    <li>@Html.ActionLink("Add Commodity", "Create", "Commodity")</li>
+                    <li>@Html.ActionLink("Add Commodity", "Create", "Commodity")</li>*@
                 </ul>
                 @using ShukRouting.Mvc.Models
                 @Html.Partial("_dropDown", (IEnumerable<CommodityModel>)@ViewBag.Commodities)
 
             </div>
         </div>
-    </div>
+    </div> 
 
     <div class="container body-content" id="container">
         <div id="body">
